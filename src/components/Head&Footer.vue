@@ -8,31 +8,31 @@
             <div class="row align-items-center">
               <div class="col-12 col-lg-3 my-1 mb-md-0 order-1 order-md-1 text-center text-lg-left">
                 <router-link to="/home" class="site-logo">
-                  <img src="../assets/images/chocolate-logo.svg" class="js-logo-clone" alt="" height="90px">
+                  <img src="../../assets/images/chocolate-logo.svg" class="js-logo-clone" alt="" height="90px">
                 </router-link> 
               </div>
               <div class="col-12 col-lg-7 mb-md-0 order-3 order-md-2 text-center">
                 <div class="site-top-icons">
                   <nav class="site-navigation text-right text-md-center" role="navigation">
-                    <div class="container">
-                      <ul class="site-menu js-clone-nav d-none d-md-block text-center text-lg-right">
+                    <div class="container website-menu-body d-none d-md-block">
+                      <ul class="site-menu js-clone-nav text-sm-left text-md-center text-lg-right" :class="{'site-nav-wrap':isMobile}">
                         <router-link to="/home" v-slot="{ href, route, navigate, isActive }">
-                          <li :class="[isActive && 'active']">
+                          <li :class="[isActive && 'active']" @click="ClickMobilMenu">
                             <a :href="href" @click="navigate">首頁</a>
                           </li>
                         </router-link>
                         <router-link to="/about" v-slot="{ href, route, navigate, isActive }">
-                          <li :class="[isActive && 'active']">
+                          <li :class="[isActive && 'active']" @click="ClickMobilMenu">
                             <a :href="href" @click="navigate">我們的故事</a>
                           </li>
                         </router-link>
                         <router-link to="/shop" v-slot="{ href, route, navigate, isActive }">
-                          <li :class="[isActive && 'active']">
+                          <li :class="[isActive && 'active']" @click="ClickMobilMenu">
                             <a :href="href" @click="navigate">我們的商品</a>
                           </li>
                         </router-link>
                         <router-link to="/ourinfo" v-slot="{ href, route, navigate, isActive }">
-                          <li :class="[isActive && 'active']">
+                          <li :class="[isActive && 'active']" @click="ClickMobilMenu">
                             <a :href="href" @click="navigate">我們在這裡</a>
                           </li>
                         </router-link>
@@ -56,7 +56,7 @@
                       </router-link>
                     </li>
                     <li class="d-inline-block d-md-none ml-md-0">
-                      <a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span>
+                      <a href="#" class="site-menu-toggle js-menu-toggle" @click.prevent="mobileMenu"><span class="icon-menu"></span>
                       </a>
                     </li> 
                   </ul>
@@ -66,7 +66,7 @@
           </div>
         </div> 
       </header>
-      <div class="bg-light py-3" v-if="$route.name !=='首頁'">
+      <div class="bg-light py-3" v-if="$route.name !=='首頁' && $route.name !=='商品頁面'">
         <div class="container">
           <div class="row">
             <div class="col-md-12 mb-0">
@@ -131,8 +131,8 @@
 </template>
 
 <script>
-import Alert from './Utilities/AlertMessageCus.vue';
-import CarIcon from './Utilities/CarIcon.vue';
+import Alert from '../Utilities/AlertMessageCus';
+import CarIcon from '../Utilities/CarIcon.vue'
 
 export default {
   components:{
@@ -143,6 +143,10 @@ export default {
     return{
       nowyear: '',
       isActive : true,
+      isMobile : false,
+      breadcrumb: false,
+      screenWidth: document.body.clientWidth,
+      pageName: ['首頁','商品頁面'],
     }
   },
   methods:{
@@ -150,9 +154,52 @@ export default {
       this.nowyear = new Date().getFullYear();
       this.$bus.$emit('cart-item','修改購物車icon');
     },
+    mobileMenu(){
+      $('.js-clone-nav').appendTo('.site-mobile-menu-body');
+      this.isMobile = true;
+    },
+    ClickMobilMenu(){
+      if(this.screenWidth<768){
+        $('body').removeClass('offcanvas-menu');
+      }else{
+        if ($('body').hasClass('offcanvas-menu')) {
+					$('body').removeClass('offcanvas-menu');
+				}
+      }
+    }
+  },
+  watch: {
+    screenWidth (val) {
+      if (!this.timer) {
+        this.screenWidth = val
+        this.timer = true
+        let vm = this
+        setTimeout(function () {
+          if(vm.screenWidth>768){
+            $('.js-clone-nav').appendTo('.website-menu-body');
+            vm.isMobile = false;
+          }else{
+            $('.js-clone-nav').appendTo('.site-mobile-menu-body');
+            vm.isMobile = true;
+          }
+          vm.timer = false
+        }, 10)
+      }
+    },
   },
   created(){
     this.nowyearfun();
+    window.onresize = () => {
+      return (() => {
+        window.screenWidth = document.body.clientWidth
+        this.screenWidth = window.screenWidth
+      })()
+    };
+    if(this.screenWidth>768){
+      this.isMobile = false;
+    }else{
+      this.isMobile = true;
+    };
   },
 }
 </script>

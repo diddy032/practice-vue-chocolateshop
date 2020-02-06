@@ -1,6 +1,19 @@
 <template>
   <div>
-    <loading :active.sync="isLoading"></loading> 
+    <loading :active.sync="isLoading"></loading>
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <router-link to="/home" >首頁</router-link>
+            <span class="mx-2 mb-0">/</span>
+            <router-link to="/shop" >我們的商品</router-link>
+            <span class="mx-2 mb-0">/</span> 
+            <strong class="text-black">{{product.title}}</strong>
+          </div>
+        </div>
+      </div>
+    </div> 
     <div class="site-section">
       <div class="container">
         <div class="row">
@@ -97,7 +110,7 @@ export default {
   methods: {
     getProduct(){
       const vm = this;
-      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${vm.tempProduct.id}`;
+      const api =`${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/product/${vm.tempProduct.id}`;
       vm.isLoading = true;
       vm.$http.get(api).then((response) => {
         if(response.data.success){
@@ -110,7 +123,7 @@ export default {
       })
     },
     addtoCart( id ){
-      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+      const api =`${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
       const vm = this;
       const cart = {
         product_id : id,

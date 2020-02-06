@@ -98,7 +98,7 @@ export default {
       });
     },
     getProducts(){
-      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products/all`;
+      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
       const vm = this;
       vm.$http.get(api).then((response) => {
         vm.Allproducts = response.data.products;
