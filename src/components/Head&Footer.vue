@@ -8,7 +8,7 @@
             <div class="row align-items-center">
               <div class="col-12 col-lg-3 my-1 mb-md-0 order-1 order-md-1 text-center text-lg-left">
                 <router-link to="/home" class="site-logo">
-                  <img src="../../assets/images/chocolate-logo.svg" class="js-logo-clone" alt="" height="90px">
+                  <img src="../assets/images/chocolate-logo.svg" class="js-logo-clone" alt="" height="90px">
                 </router-link> 
               </div>
               <div class="col-12 col-lg-7 mb-md-0 order-3 order-md-2 text-center">
@@ -131,8 +131,9 @@
 </template>
 
 <script>
-import Alert from '../Utilities/AlertMessageCus';
-import CarIcon from '../Utilities/CarIcon.vue'
+import Alert from './Utilities/AlertMessageCus.vue';
+import CarIcon from './Utilities/CarIcon.vue';
+import '../assets/js/main.js';
 
 export default {
   components:{
@@ -144,9 +145,7 @@ export default {
       nowyear: '',
       isActive : true,
       isMobile : false,
-      breadcrumb: false,
       screenWidth: document.body.clientWidth,
-      pageName: ['首頁','商品頁面'],
     }
   },
   methods:{
@@ -157,6 +156,7 @@ export default {
     mobileMenu(){
       $('.js-clone-nav').appendTo('.site-mobile-menu-body');
       this.isMobile = true;
+      console.log('hi',this.isMobile)
     },
     ClickMobilMenu(){
       if(this.screenWidth<768){

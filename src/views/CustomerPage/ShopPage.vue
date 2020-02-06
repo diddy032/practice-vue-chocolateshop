@@ -38,7 +38,9 @@
                     </router-link>
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="#" class="text-primary">{{item.title}}</a></h3>
+                    <router-link  :to="`/shopsitem/${item.id}`">
+                      <h3>{{item.title}}</h3>
+                    </router-link>
                     <div class="my-3">
                       <div class="text-primary font-weight-bold h3 mb-0 mb-2">NT{{item.price | currency}}</div>
                       <del class="h5">NT{{item.origin_price | currency}}</del>
@@ -76,7 +78,9 @@
                       </router-link>
                     </figure>
                     <div class="block-4-text p-4">
-                      <h3><a href="text-primary">{{item.title}}</a></h3>
+                      <router-link  :to="`/shopsitem/${item.id}`">
+                        <h3>{{item.title}}</h3>
+                      </router-link>
                       <div class="my-3">
                         <div class="text-primary font-weight-bold h3 mb-0 mb-2">NT{{item.price | currency}}</div>
                         <del class="h5">NT{{item.origin_price | currency}}</del>
@@ -167,11 +171,12 @@
         </div>
       </div>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Pagination from '../../components/Utilities/Pagination.vue';
+import Pagination  from '../../components/Utilities/Pagination.vue'
 
 export default {
   components:{

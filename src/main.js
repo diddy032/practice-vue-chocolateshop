@@ -1,26 +1,29 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import jQuery from 'jquery'
-window.$ = window.jQuery = jQuery
+window.$ = window.jQuery = jQuery;
 import 'bootstrap';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import VeeValidate from 'vee-validate';
-import zhTW from 'vee-validate/dist/locale/zh_TW'
-import VueI18n from 'vue-i18n'
+import zhTW from 'vee-validate/dist/locale/zh_TW';
+import VueI18n from 'vue-i18n';
 import 'animate.css';
 import AOS from 'aos';
 import carousel from 'vue-owl-carousel';
 import currencyFilter from './filters/currency';
 import formatDateFilter from './filters/formatDate';
 import productidchangeFilter from './filters/productidchange';
+import './assets/js/jquery-ui.js';
+import './assets/js/slick.min';
 import './assets/all.scss';
+// import './assets/js/main';
 import './bus';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 window.Bootstrap = require('bootstrap');
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);

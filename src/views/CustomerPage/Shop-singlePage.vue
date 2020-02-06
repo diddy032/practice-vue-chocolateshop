@@ -110,7 +110,7 @@ export default {
   methods: {
     getProduct(){
       const vm = this;
-      const api =`${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/product/${vm.tempProduct.id}`;
+      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${vm.tempProduct.id}`;
       vm.isLoading = true;
       vm.$http.get(api).then((response) => {
         if(response.data.success){
@@ -123,7 +123,7 @@ export default {
       })
     },
     addtoCart( id ){
-      const api =`${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
       const vm = this;
       const cart = {
         product_id : id,
