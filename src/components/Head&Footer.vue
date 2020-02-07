@@ -156,7 +156,6 @@ export default {
     mobileMenu(){
       $('.js-clone-nav').appendTo('.site-mobile-menu-body');
       this.isMobile = true;
-      console.log('hi',this.isMobile)
     },
     ClickMobilMenu(){
       if(this.screenWidth<768){

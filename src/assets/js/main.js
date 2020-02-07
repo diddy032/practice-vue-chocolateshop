@@ -3,7 +3,6 @@
 jQuery(document).ready(function ($) {
 	"use strict";
 	var siteMenuClone = function () {
-		console.log('hoio')
 		$('<div class="site-mobile-menu"></div>').prependTo('.site-wrap');
 
 		$('<div class="site-mobile-menu-header"></div>').prependTo('.site-mobile-menu');
