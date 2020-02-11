@@ -37,34 +37,33 @@
 export default {
   data () {
     return {
-      user:{
+      user: {
         username: '',
-        password: '',
-      },
+        password: ''
+      }
     }
   },
-  methods:{
-    signin(){
-      const api =`${process.env.VUE_APP_APIPATH}/admin/signin`;
-      const vm = this;
-      this.$http.post(api,vm.user).then((response) => {
-        if(response.data.success){
+  methods: {
+    signin () {
+      const api = `${process.env.VUE_APP_APIPATH}/admin/signin`
+      const vm = this
+      vm.$http.post(api, vm.user).then((response) => {
+        if (response.data.success) {
           vm.$router.push('/admin/products')
-        }else{
-          vm.$bus.$emit('message:push',response.data.message +"，請重新輸入帳號密碼",'danger');
-          vm.user.username='';
-          vm.user.password='';
+        } else {
+          vm.$bus.$emit('message:push', response.data.message + '，請重新輸入帳號密碼', 'danger')
+          vm.user.username = ''
+          vm.user.password = ''
         }
-      });
+      })
     }
-  },
+  }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  @import "../../assets/css/login-main.css";
-  @import "../../assets/css/login-util.css";
+<style lang="scss" scoped>
+  @import "../../assets/helpers/login-main.css";
+  @import "../../assets/helpers/login-util.css";
 
   .img-cover{
     background-image: url("../../assets/images/login.jpg");

@@ -75,27 +75,25 @@
 </template>
 
 <script>
-import Alert from './Utilities/AlertMessageAdm.vue';
+import Alert from './Utilities/AlertMessageAdm.vue'
 
 export default {
-  components:{
-    Alert,
+  components: {
+    Alert
   },
   methods: {
-    signout(){
-      const api =`${process.env.VUE_APP_APIPATH}/logout`;
-      const vm = this;
-      this.$http.post(api).then((response) => {
-        if(response.data.success){
+    signout () {
+      const api = `${process.env.VUE_APP_APIPATH}/logout`
+      const vm = this
+      vm.$http.post(api).then((response) => {
+        if (response.data.success) {
           vm.$router.push('/home')
         }
-      });
-    },
-  },
+      })
+    }
+  }
 }
 </script>
-
-
 <style scoped>
   body {
     font-size: .875rem;
@@ -195,6 +193,3 @@ export default {
     }
   }
 </style>
-
-
-

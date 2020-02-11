@@ -39,7 +39,7 @@
               <td class="text-center">
                 <button class="btn btn-outline-danger btn-sm" @click="openDelModal(item)">刪除</button>
               </td>
-            </tr> 
+            </tr>
           </tbody>
         </table>
       </div>
@@ -106,7 +106,7 @@
                   <label for="code">輸入碼(只能輸入英數)</label>
                   <input type="text" class="form-control" id="code" onkeyup="this.value=this.value.replace(/[^\w_]/g,'');"
                     placeholder="請輸入輸入碼" v-model.trim="tempCoupon.code" name ="code" v-validate="'required'" :class="{'is-invalid':errors.has('code')}">
-                  <span class="text-danger" v-if="errors.has('code')">輸入碼必須輸入</span>     
+                  <span class="text-danger" v-if="errors.has('code')">輸入碼必須輸入</span>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
@@ -165,126 +165,123 @@
 </template>
 
 <script>
-import Pagination  from '../../components/Utilities/Pagination.vue'
+import Pagination from '../../components/Utilities/Pagination.vue'
+import $ from 'jquery'
 export default {
-  components:{
-    Pagination,
+  components: {
+    Pagination
   },
-  data(){
-    return{
-      coupons:[],
-      AllPagination:{},
-      tempCoupon:{},
-      tempPercentage: "100",
-      tempTime:"",
-      isNew:false,
-      isLoading:false,
+  data () {
+    return {
+      coupons: [],
+      AllPagination: {},
+      tempCoupon: {},
+      tempPercentage: '100',
+      tempTime: '',
+      isNew: false,
+      isLoading: false,
       LoadingAtt: {
-        loader:"bars",
-        color: "#7971ea",
-      },
+        loader: 'bars',
+        color: '#7971ea'
+      }
     }
   },
   methods: {
-    getCoupons(page = 1){
-      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`;
-      const vm = this;
-      vm.isLoading = true;
+    getCoupons (page = 1) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupons?page=${page}`
+      const vm = this
+      vm.isLoading = true
       vm.$http.get(api).then((response) => {
-        vm.coupons = response.data.coupons;
-        vm.AllPagination = response.data.pagination;
-        vm.isLoading = false;
+        vm.coupons = response.data.coupons
+        vm.AllPagination = response.data.pagination
+        vm.isLoading = false
       })
     },
-    openModal(isNew,item){
-      const vm = this;
-      if(isNew){
-        vm.tempCoupon = {};
-        vm.isNew = true;
-        vm.tempTime = "";
-      }else{
-        vm.tempCoupon = Object.assign({},item);
-        vm.isNew = false;
-
-        const val = JSON.parse(vm.tempCoupon.due_date*1000)
-        const date = new Date(val);
-        const Y = date.getFullYear() + '-';
-        const M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-        const D = (date.getDate()< 10 ? '0' : '')+ date.getDate();
-        vm.tempTime = Y + M + D ;
+    openModal (isNew, item) {
+      const vm = this
+      if (isNew) {
+        vm.tempCoupon = {}
+        vm.isNew = true
+        vm.tempTime = ''
+      } else {
+        vm.tempCoupon = Object.assign({}, item)
+        vm.isNew = false
+        const val = JSON.parse(vm.tempCoupon.due_date * 1000)
+        const date = new Date(val)
+        const Y = date.getFullYear() + '-'
+        const M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+        const D = (date.getDate() < 10 ? '0' : '') + date.getDate()
+        vm.tempTime = Y + M + D
       }
-      $('#couponModal').modal('show');
+      $('#couponModal').modal('show')
     },
-    updateCoupon(){
-      let api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`;
-      const vm = this;
-      let httpMethod = 'post';
-      if(!vm.isNew){
-        api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
+    updateCoupon () {
+      let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`
+      const vm = this
+      let httpMethod = 'post'
+      if (!vm.isNew) {
+        api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`
         httpMethod = 'put'
       }
-      this.$validator.validate().then(valid => {
-        if(!valid) {
-          vm.$bus.$emit('message:push','欄位不完整','danger');
-          return
-        }else{
-          this.$http[httpMethod](api,{data:vm.tempCoupon}).then((response) => {
-            if(response.data.success){
-              vm.$bus.$emit('message:push',response.data.message,'success');
-              $('#couponModal').modal('hide');
-              vm.getCoupons();
-            }else{
-              vm.$bus.$emit('message:push',response.data.message,'danger');
-              $('#couponModal').modal('hide');
-              vm.getCoupons();
+      vm.$validator.validate().then(valid => {
+        if (!valid) {
+          vm.$bus.$emit('message:push', '欄位不完整', 'danger')
+        } else {
+          vm.$http[httpMethod](api, { data: vm.tempCoupon }).then((response) => {
+            if (response.data.success) {
+              vm.$bus.$emit('message:push', response.data.message, 'success')
+              $('#couponModal').modal('hide')
+              vm.getCoupons()
+            } else {
+              vm.$bus.$emit('message:push', response.data.message, 'danger')
+              $('#couponModal').modal('hide')
+              vm.getCoupons()
             }
           })
         }
-      });
+      })
     },
-    openDelModal(item){
-      $('#delCouponModal').modal('show');
-      this.tempCoupon = Object.assign({},item)
+    openDelModal (item) {
+      $('#delCouponModal').modal('show')
+      this.tempCoupon = Object.assign({}, item)
     },
-    delCoupon(){
-      const vm = this;
-      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`;
-      this.$http.delete(api).then((response) => {
-        if(response.data.success){
-          vm.$bus.$emit('message:push',response.data.message,'success');
-          $('#delCouponModal').modal('hide');
-          vm.getCoupons();
-        }else{
-          vm.$bus.$emit('message:push',response.data.message,'danger');
-          $('#delCouponModal').modal('hide');
-          vm.getCoupons();
+    delCoupon () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon/${vm.tempCoupon.id}`
+      vm.$http.delete(api).then((response) => {
+        if (response.data.success) {
+          vm.$bus.$emit('message:push', response.data.message, 'success')
+          $('#delCouponModal').modal('hide')
+          vm.getCoupons()
+        } else {
+          vm.$bus.$emit('message:push', response.data.message, 'danger')
+          $('#delCouponModal').modal('hide')
+          vm.getCoupons()
         }
       })
     },
-    TimeChange(){
-      this.tempCoupon.due_date =( new Date(this.tempTime.replace(/-/g, '/')).valueOf())/1000;
-    },
+    TimeChange () {
+      this.tempCoupon.due_date = (new Date(this.tempTime.replace(/-/g, '/')).valueOf()) / 1000
+    }
   },
   watch: {
-    tempPercentage: function(){
-      const vm = this;
+    tempPercentage: function () {
+      const vm = this
       const num = Math.abs(vm.tempPercentage)
-      vm.tempCoupon.percent = "";
-      if(typeof num === 'number' && num % 1 == 0){
-        if(Math.floor(num)>100){
-          vm.$bus.$emit('message:push','格式錯誤，數值需小於100','danger')
+      vm.tempCoupon.percent = ''
+      if (typeof num === 'number' && num % 1 === 0) {
+        if (Math.floor(num) > 100) {
+          vm.$bus.$emit('message:push', '格式錯誤，數值需小於100', 'danger')
           return
         }
         vm.tempCoupon.percent = Math.floor(num)
-        console.log('整數')
-      }else{
-        vm.$bus.$emit('message:push','格式錯誤，請輸入正整數','danger');
-        return
+      } else {
+        vm.$bus.$emit('message:push', '格式錯誤，請輸入正整數', 'danger')
       }
     }
   },
-  created() {
-    this.getCoupons();
-  },
+  created () {
+    this.getCoupons()
+  }
 }
 </script>

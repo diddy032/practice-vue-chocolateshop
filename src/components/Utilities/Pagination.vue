@@ -23,16 +23,16 @@
 <script>
 export default {
   name: 'pages',
-  props:{
-    pages:{
-      type: Object,
+  props: {
+    pages: {
+      type: Object
     }
   },
   methods: {
-    changePagination(page){
-      this.$emit('changeCurrentPage',page)
+    changePagination (page) {
+      this.$emit('changeCurrentPage', page)
     }
-  },
+  }
 }
 </script>
 

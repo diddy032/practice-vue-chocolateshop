@@ -57,7 +57,7 @@
                           </div>
                         </td>
                         <td class="text-primary font-weight-normal">
-                          <strong class="mx-2 my-auto">x</strong> 
+                          <strong class="mx-2 my-auto">x</strong>
                           {{item.qty}}
                         </td>
                         <td class="text-primary text-right font-weight-normal">
@@ -118,66 +118,66 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
-      cart:[],
-      Coupon:{},
-      form:{
-        user:{
-          name:"",
-          email: "",
-          tel: "",
-          address: "",
+      cart: [],
+      Coupon: {},
+      form: {
+        user: {
+          name: '',
+          email: '',
+          tel: '',
+          address: ''
         },
-        message:"",
+        message: ''
       },
       isLoading: false,
-      couponShow: false,
+      couponShow: false
     }
   },
   methods: {
-    getCart(){
-      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      const vm = this;
-      vm.isLoading = true;
+    getCart () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      const vm = this
+      vm.isLoading = true
       vm.$http.get(api).then((response) => {
-        vm.isLoading = false;
-        vm.cart = response.data.data;
+        vm.isLoading = false
+        vm.cart = response.data.data
 
-        if(vm.cart.total === 0){
-           vm.$router.push(`/home`)
-           vm.$bus.$emit('message:push','該頁面目前禁止訪問','danger');
+        if (vm.cart.total === 0) {
+          vm.$router.push('/home')
+          vm.$bus.$emit('message:push', '該頁面目前禁止訪問', 'danger')
         }
 
-        if(vm.cart.final_total !== vm.cart.total){
-          vm.Coupon = vm.cart.carts[0].coupon;
-          vm.couponShow = true;
-        }else{
-          vm.Coupon = {};
-          vm.couponShow = false;
+        if (vm.cart.final_total !== vm.cart.total) {
+          vm.Coupon = vm.cart.carts[0].coupon
+          vm.couponShow = true
+        } else {
+          vm.Coupon = {}
+          vm.couponShow = false
         }
       })
     },
-    createOrder(){
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`;
-      const vm = this;
-      const order = vm.form;
-      this.$validator.validate().then((result) => {
+    createOrder () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/order`
+      const vm = this
+      const order = vm.form
+      vm.$validator.validate().then((result) => {
         if (result) {
-          this.$http.post(api,{data: order}).then((response) => {
-            if(response.data.success){
-              vm.$bus.$emit('message:push',response.data.message,'success');
+          vm.$http.post(api, { data: order }).then((response) => {
+            if (response.data.success) {
+              vm.$bus.$emit('message:push', response.data.message, 'success')
               vm.$router.push(`/thankyou/${response.data.orderId}`)
             }
-          });
-        }else{
-          vm.$bus.$emit('message:push','欄位不完整','danger');
+          })
+        } else {
+          vm.$bus.$emit('message:push', '欄位不完整', 'danger')
         }
-      });
+      })
     }
   },
-  created() {
-    this.getCart();
-  },
+  created () {
+    this.getCart()
+  }
 }
 </script>

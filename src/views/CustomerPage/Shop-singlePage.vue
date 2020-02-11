@@ -8,12 +8,12 @@
             <router-link to="/home" >首頁</router-link>
             <span class="mx-2 mb-0">/</span>
             <router-link to="/shop" >我們的商品</router-link>
-            <span class="mx-2 mb-0">/</span> 
+            <span class="mx-2 mb-0">/</span>
             <strong class="text-black">{{product.title}}</strong>
           </div>
         </div>
       </div>
-    </div> 
+    </div>
     <div class="site-section">
       <div class="container">
         <div class="row">
@@ -41,7 +41,7 @@
             <div class="d-flex">
               <button type="button" @click.prevent="addtoCart(product.id)" class="buy-now btn btn-sm btn-primary">加入購物車</button>
               <div class="mx-3">
-                <div class="text-primary position-absolute" style=" z-index: 3;" @click="EditLikeList(product.id)"> 
+                <div class="text-primary position-absolute" style=" z-index: 3;" @click="EditLikeList(product.id)">
                   <div class="like-farme-iton text-danger">
                     <i class="far fa-heart like-iton" v-if="liked.indexOf(product.id)== -1"></i>
                     <i class="fas fa-heart like-iton" v-else></i>
@@ -93,76 +93,76 @@
 <script>
 
 export default {
-  data() {
+  data () {
     return {
-      product:{},
-      liked: JSON.parse(localStorage.getItem("Like Item List")) || [],
-      tempProduct:{
-        id:'',
-        qty:1,
+      product: {},
+      liked: JSON.parse(localStorage.getItem('Like Item List')) || [],
+      tempProduct: {
+        id: '',
+        qty: 1
       },
-      status:{
-        loadingItem: '',
+      status: {
+        loadingItem: ''
       },
-      isLoading: false,
+      isLoading: false
     }
   },
   methods: {
-    getProduct(){
-      const vm = this;
-      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${vm.tempProduct.id}`;
-      vm.isLoading = true;
+    getProduct () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/product/${vm.tempProduct.id}`
+      vm.isLoading = true
       vm.$http.get(api).then((response) => {
-        if(response.data.success){
-          vm.isLoading = false;
-          vm.product = response.data.product;
-        }else{
-          vm.$bus.$emit('message:push',response.data.message,'danger')
+        if (response.data.success) {
+          vm.isLoading = false
+          vm.product = response.data.product
+        } else {
+          vm.$bus.$emit('message:push', response.data.message, 'danger')
           vm.$router.push('/shop')
         }
       })
     },
-    addtoCart( id ){
-      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      const vm = this;
+    addtoCart (id) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      const vm = this
       const cart = {
-        product_id : id,
-        qty : parseInt(vm.tempProduct.qty),
-      };
-      vm.status.loadingItem = id;
-      this.$http.post(api,{data:cart}).then((response) => {
-        vm.status.loadingItem = '';
-        vm.getProduct();
-        vm.$bus.$emit('message:push',response.data.message,'success');
-        vm.$bus.$emit('cart-item','修改購物車icon');
+        product_id: id,
+        qty: parseInt(vm.tempProduct.qty)
+      }
+      vm.status.loadingItem = id
+      vm.$http.post(api, { data: cart }).then((response) => {
+        vm.status.loadingItem = ''
+        vm.getProduct()
+        vm.$bus.$emit('message:push', response.data.message, 'success')
+        vm.$bus.$emit('cart-item', '修改購物車icon')
       })
     },
-    EditLikeList(item){
-      const vm =  this;
-      var num = vm.liked.indexOf(item);
-      if(num == -1){
-        vm.liked.push(item);
-        vm.$bus.$emit('message:push','「加入」願望清單','success');
-      }else{
-        vm.liked.splice( num , 1);
-        vm.$bus.$emit('message:push','「移出」願望清單','warning');
+    EditLikeList (item) {
+      const vm = this
+      const num = vm.liked.indexOf(item)
+      if (num === -1) {
+        vm.liked.push(item)
+        vm.$bus.$emit('message:push', '「加入」願望清單', 'success')
+      } else {
+        vm.liked.splice(num, 1)
+        vm.$bus.$emit('message:push', '「移出」願望清單', 'warning')
       }
-      localStorage.setItem('Like Item List', JSON.stringify(vm.liked));
+      localStorage.setItem('Like Item List', JSON.stringify(vm.liked))
     },
-    MinusCount(){
-      const vm =  this;
-      if(vm.tempProduct.qty>1){
-        vm.tempProduct.qty--;
+    MinusCount () {
+      const vm = this
+      if (vm.tempProduct.qty > 1) {
+        vm.tempProduct.qty--
       }
     },
-    AddCount(){
-      const vm =  this;
-      vm.tempProduct.qty++;
-    },
+    AddCount () {
+      const vm = this
+      vm.tempProduct.qty++
+    }
   },
-  created(){
-    this.tempProduct.id = this.$route.params.id;
-    this.getProduct();
+  created () {
+    this.tempProduct.id = this.$route.params.id
+    this.getProduct()
   }
 }
 </script>

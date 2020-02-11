@@ -168,56 +168,56 @@
   </div>
 </template>
 
-<script> 
+<script>
 export default {
-  data() {
+  data () {
     return {
-      cart:[],
+      cart: [],
       isLoading: false,
-      coupon_code:'',
+      coupon_code: ''
     }
   },
   methods: {
-    getCart(){
-      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      const vm = this;
-      vm.isLoading = true;
+    getCart () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      const vm = this
+      vm.isLoading = true
       vm.$http.get(api).then((response) => {
-        vm.isLoading = false;
-        vm.cart = response.data.data;
-        vm.$bus.$emit('cart-item','修改購物車icon');
+        vm.isLoading = false
+        vm.cart = response.data.data
+        vm.$bus.$emit('cart-item', '修改購物車icon')
       })
     },
-    removeCartItem(id){
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`;
-      const vm = this;
-      vm.isLoading = true;
-      this.$http.delete(api).then((response) => {
-        if(response.data.success){
-          vm.$bus.$emit('message:push','該商品'+response.data.message,'success')
-          vm.isLoading = false;
-          vm.getCart();
+    removeCartItem (id) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart/${id}`
+      const vm = this
+      vm.isLoading = true
+      vm.$http.delete(api).then((response) => {
+        if (response.data.success) {
+          vm.$bus.$emit('message:push', '該商品' + response.data.message, 'success')
+          vm.isLoading = false
+          vm.getCart()
         }
-      });
+      })
     },
-    addCouponCode(){
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`;
-      const vm = this;
+    addCouponCode () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/coupon`
+      const vm = this
       const coupon = {
-        code: vm.coupon_code,
+        code: vm.coupon_code
       }
-      this.$http.post(api,{data:coupon}).then((response) => {
-        if(response.data.success){
-          vm.$bus.$emit('message:push',response.data.message,'success')
-        }else{
-          vm.$bus.$emit('message:push',response.data.message,'danger')
+      vm.$http.post(api, { data: coupon }).then((response) => {
+        if (response.data.success) {
+          vm.$bus.$emit('message:push', response.data.message, 'success')
+        } else {
+          vm.$bus.$emit('message:push', response.data.message, 'danger')
         }
-        vm.getCart();
-      });
+        vm.getCart()
+      })
     }
   },
-  created() {
-    this.getCart();
-  },
+  created () {
+    this.getCart()
+  }
 }
 </script>

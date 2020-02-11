@@ -103,47 +103,41 @@
         </div>
       </div>
     </div>
-
-    
   </div>
 </template>
 
 <script>
-  import carousel from 'vue-owl-carousel'
+import carousel from 'vue-owl-carousel'
 
-  export default {
-      components: { carousel },
-    data() {
-      return {
-        products: [],
-      }
+export default {
+  components: { carousel },
+  data () {
+    return {
+      products: []
+    }
+  },
+  methods: {
+    getAllProducts () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
+      const vm = this
+      vm.$http.get(api).then((response) => {
+        vm.products = (response.data.products.slice(-6)).reverse()
+      })
     },
-    methods: {
-      getAllProducts(){
-        const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-        const vm = this;
-        vm.$http.get(api).then((response) => {
-          vm.products = (response.data.products.slice(-6)).reverse();
-        })
-      },
-      toCategory(Name){
-        this.$router.push({
-          name:'我們的商品',
-          params:{categoryName:Name},
-        });
-      },
-    },
-    created() {
-      this.getAllProducts();
-    },
+    toCategory (Name) {
+      this.$router.push({
+        name: '我們的商品',
+        params: { categoryName: Name }
+      })
+    }
+  },
+  created () {
+    this.getAllProducts()
   }
-
+}
 </script>
 <style lang="scss">
   .site-blocks-cover {
     background-image: url("../../assets/images/banner-banner.jpg");
   }
 </style>
-
-
-    

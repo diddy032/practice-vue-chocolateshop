@@ -47,7 +47,7 @@
                       </a>
                     </td>
                     <td>
-                      <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="delWishList(item.title)">X</a>
+                      <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="delWishList(item.id)">X</a>
                     </td>
                   </tr>
                 </tbody>
@@ -92,7 +92,7 @@
                   <a href="#" class="btn btn-primary btn-sm" @click.prevent="addtoCart(item.id,item.qty)">
                     <i class="fas fa-cart-plus"></i>
                   </a>
-                  <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="delWishList(item.title)">X</a>
+                  <a href="#" class="btn btn-outline-secondary btn-sm" @click.prevent="delWishList(item.id)">X</a>
                 </div>
               </div>
             </div>
@@ -112,81 +112,79 @@
     </div>
   </div>
 </template>
-
-
 <script>
 export default {
-  data() {
+  data () {
     return {
-      products:[],
-      WishItemInfo:[],
-      WishList:JSON.parse(localStorage.getItem("Like Item List")) || [],
-      isLoading: false,
+      products: [],
+      WishItemInfo: [],
+      WishList: JSON.parse(localStorage.getItem('Like Item List')) || [],
+      isLoading: false
     }
   },
   methods: {
-    getProducts(){
-      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      const vm = this;
-      vm.isLoading = true;
+    getProducts () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
+      const vm = this
+      vm.isLoading = true
       vm.$http.get(api).then((response) => {
-        vm.products = response.data.products;
-        vm.isLoading = false;
-        vm.getWishLish();
+        vm.products = response.data.products
+        vm.isLoading = false
+        vm.getWishLish()
       })
     },
-    getWishLish(){
-      const vm = this;
-      vm.WishItemInfo = vm.products.filter( function(element, index, array) {
-        return vm.WishList.indexOf(element.id)>-1;
-      });
-      vm.WishItemInfo.forEach(function(element, index, array){
+    getWishLish () {
+      const vm = this
+      vm.WishItemInfo = vm.products.filter(function (element, index, array) {
+        return vm.WishList.indexOf(element.id) > -1
+      })
+      vm.WishItemInfo.forEach(function (element, index, array) {
         element.qty = 1
-      });
+      })
     },
-    delWishList(item){
-      const vm = this;
-      var num = vm.WishList.indexOf(item)
-      if(num !== -1){
-        vm.WishList.splice(num , 1)
+    delWishList (item) {
+      const vm = this
+      const num = vm.WishList.indexOf(item)
+      if (num !== -1) {
+        vm.WishList.splice(num, 1)
         vm.getWishLish()
       }
-       localStorage.setItem('Like Item List', JSON.stringify(vm.WishList));
+      localStorage.setItem('Like Item List', JSON.stringify(vm.WishList))
     },
-    addtoCart(id , qty){
-      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      const vm = this;
+    addtoCart (id, qty) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      const vm = this
       const cart = {
-        product_id : id,
+        product_id: id,
         qty
-      };
-      this.$http.post(api,{data:cart}).then((response) => {
+      }
+      vm.$http.post(api, { data: cart }).then((response) => {
         const num = vm.WishList.indexOf(id)
-        if(num !== -1){
-          vm.WishList.splice(num , 1)
+        if (num !== -1) {
+          vm.WishList.splice(num, 1)
           vm.getWishLish()
         }
-        localStorage.setItem('Like Item List', JSON.stringify(vm.WishList));
-        vm.$bus.$emit('message:push','商品加入購物車','success');
-        vm.$bus.$emit('cart-item','修改購物車icon');
+        localStorage.setItem('Like Item List', JSON.stringify(vm.WishList))
+        vm.$bus.$emit('message:push', '商品加入購物車', 'success')
+        vm.$bus.$emit('cart-item', '修改購物車icon')
       })
     },
-    MinusCount(item){
-      if(item.qty>1){
-        item.qty--;
+    MinusCount (item) {
+      if (item.qty > 1) {
+        item.qty--
       }
       const num = this.WishItemInfo.indexOf(item)
-      this.$set(this.WishItemInfo,num,this.WishItemInfo[num])
+      this.$set(this.WishItemInfo, num, this.WishItemInfo[num])
     },
-    AddCount(item){
-      item.qty++;
+    AddCount (item) {
+      item.qty++
       const num = this.WishItemInfo.indexOf(item)
-      this.$set(this.WishItemInfo,num,this.WishItemInfo[num])
-    },
+      this.$set(this.WishItemInfo, num, this.WishItemInfo[num])
+    }
   },
-  created() {
-    this.getProducts();
-  },
+  created () {
+    this.getProducts()
+  }
 }
 </script>
 <style lang="scss" spoced>

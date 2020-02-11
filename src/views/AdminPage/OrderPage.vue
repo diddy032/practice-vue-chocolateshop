@@ -35,7 +35,7 @@
             <td class="text-center">
               <button class="btn btn-outline-primary btn-sm" @click="openModal(item)">詳情</button>
             </td>
-          </tr> 
+          </tr>
         </tbody>
       </table>
     </div>
@@ -126,73 +126,71 @@
 </template>
 
 <script>
-import Pagination from '../../components/Utilities/Pagination.vue';
-
+import Pagination from '../../components/Utilities/Pagination.vue'
+import $ from 'jquery'
 export default {
-  components:{
-    Pagination,
+  components: {
+    Pagination
   },
-  data() {
+  data () {
     return {
-      orders:[],
-      Allproducts:[],
+      orders: [],
+      Allproducts: [],
       AllPagination: {},
-      tempOrder:{
-        user: {},
+      tempOrder: {
+        user: {}
       },
-      isLoading:false,
-      tempTime:"",
+      isLoading: false,
+      tempTime: '',
       LoadingAtt: {
-        loader:"bars",
-        color: "#7971ea",
-      },
+        loader: 'bars',
+        color: '#7971ea'
+      }
     }
   },
   methods: {
-    getOrders(page = 1){
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${page}`;
-      const vm = this;
-      vm.isLoading = true;
+    getOrders (page = 1) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/orders?page=${page}`
+      const vm = this
+      vm.isLoading = true
       vm.$http.get(api).then((response) => {
-        vm.orders = response.data.orders.reverse().filter( function(element, index, array) {
-          return element.id !== undefined;
-        });
-        vm.AllPagination = response.data.pagination;
-        vm.isLoading = false;
-        console.log(vm.orders)
+        vm.orders = response.data.orders.reverse().filter(function (element, index, array) {
+          return element.id !== undefined
+        })
+        vm.AllPagination = response.data.pagination
+        vm.isLoading = false
       })
     },
-    getProducts(){
-      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products/all`;
-      const vm = this;
-      vm.isLoading = true;
+    getProducts () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/products/all`
+      const vm = this
+      vm.isLoading = true
       vm.$http.get(api).then((response) => {
-        vm.Allproducts = response.data.products;
-        vm.isLoading = false;
+        vm.Allproducts = response.data.products
+        vm.isLoading = false
       })
     },
-    openModal(item){
-      $('#orderModal').modal('show');
-      this.tempOrder= Object.assign({},item);
+    openModal (item) {
+      $('#orderModal').modal('show')
+      this.tempOrder = Object.assign({}, item)
     },
-    updateOrder(){
-      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/order/${vm.tempOrder.id}`;
-      const vm = this;
-      this.$http.put(api).then((response) => {
-        vm.$bus.$emit('message:push',response.data.message,'success');
-        $('#orderModal').modal('hide');
-        vm.getOrders();
+    updateOrder () {
+      const vm = this
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/order/${vm.tempOrder.id}`
+      vm.$http.put(api).then((response) => {
+        vm.$bus.$emit('message:push', response.data.message, 'success')
+        $('#orderModal').modal('hide')
+        vm.getOrders()
       })
     }
   },
   watch: {
-    tempOrder(){
-      console.log(this.tempOrder.is_paid)
+    tempOrder () {
     }
   },
-  created() {
-    this.getOrders();
-    this.getProducts();
-  },
+  created () {
+    this.getOrders()
+    this.getProducts()
+  }
 }
 </script>

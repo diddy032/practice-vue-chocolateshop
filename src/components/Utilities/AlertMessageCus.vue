@@ -1,5 +1,5 @@
 <template>
-  <div class="message-alert animated slideInDown	 delay-2s">
+  <div class="message-alert animated slideInDown delay-2s">
     <div class="alert alert-dismissible text-center" :class="'alert-' + item.status" v-for="(item, i) in messages" :key="i">
       {{ item.message }}
        <button type="button" class="close" @click="removeMessage(i)" aria-label="Close">
@@ -10,60 +10,60 @@
 </template>
 
 <script>
-import $ from 'jquery';
+// import $ from 'jquery'
 export default {
-  data() {
+  data () {
     return {
-      messages: [],
-    };
+      messages: []
+    }
   },
   methods: {
-    updateMessage(message, status) {
-      const timestamp = Math.floor(new Date() / 1000);
+    updateMessage (message, status) {
+      const timestamp = Math.floor(new Date() / 1000)
       this.messages.push({
         message,
         status,
-        timestamp,
-    });
-    this.removeMessageWithTiming(timestamp);
+        timestamp
+      })
+      this.removeMessageWithTiming(timestamp)
     },
-    removeMessage(num) {
-      this.messages.splice(num, 1);
+    removeMessage (num) {
+      this.messages.splice(num, 1)
     },
-    removeMessageWithTiming(timestamp) {
-      const vm = this;
+    removeMessageWithTiming (timestamp) {
+      const vm = this
       setTimeout(() => {
         vm.messages.forEach((item, i) => {
           if (item.timestamp === timestamp) {
-            vm.messages.splice(i, 1);
+            vm.messages.splice(i, 1)
           }
-        });
-      }, 3000);
-    },
+        })
+      }, 3000)
+    }
   },
-  created() {
-    const vm = this;
+  created () {
+    const vm = this
     vm.$bus.$on('message:push', (message, status = 'warning') => {
-      vm.updateMessage(message, status);
-    });
-  },
-};
+      vm.updateMessage(message, status)
+    })
+  }
+}
 </script>
 
 <style scope>
-.message-alert {
-  width: 100%;
-  position: fixed;
-  z-index: 1100;
-}
-.alert-dismissible{
-  padding: 0.5rem 1.25rem;
-}
-.alert-dismissible .close{
-  position: relative;
-  padding: 0;
-}
-.close{
-  float: initial;
-}
+  .message-alert {
+    width: 100%;
+    position: fixed;
+    z-index: 1100;
+  }
+  .alert-dismissible{
+    padding: 0.5rem 1.25rem;
+  }
+  .alert-dismissible .close{
+    position: relative;
+    padding: 0;
+  }
+  .close{
+    float: initial;
+  }
 </style>

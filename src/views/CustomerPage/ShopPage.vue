@@ -26,7 +26,7 @@
             <div class="row mb-5" v-if="FilterPorducts.length>0" >
               <div class="col-12 col-lg-6 mb-4" v-for="(item, index) in FilterPorducts" :key="index">
                 <div class="block-4 text-center border position-relative">
-                  <div class="position-absolute p-2 m-2 text-danger" style="right: 0; z-index: 3;" @click="EditLikeList(item)"> 
+                  <div class="position-absolute p-2 m-2 text-danger" style="right: 0; z-index: 3;" @click="EditLikeList(item)">
                     <div class="like-farme-iton text-danger">
                       <i class="far fa-heart like-iton text-danger" v-if="liked.indexOf(item.id)== -1"></i>
                       <i class="fas fa-heart like-iton text-danger" v-else></i>
@@ -66,7 +66,7 @@
               <div class="row mb-5">
                 <div class="col-12 col-lg-6 mb-4" v-for="(item, index) in products" :key="index">
                   <div class="block-4 text-center border position-relative">
-                    <div class="position-absolute p-2 m-2 text-danger " style="right: 0; z-index: 3;" @click="EditLikeList(item)"> 
+                    <div class="position-absolute p-2 m-2 text-danger " style="right: 0; z-index: 3;" @click="EditLikeList(item)">
                       <div class="like-farme-iton">
                         <i class="far fa-heart like-iton" v-if="liked.indexOf(item.id)== -1"></i>
                         <i class="fas fa-heart like-iton" v-else></i>
@@ -103,7 +103,7 @@
               <Pagination :pages="paginations" @changeCurrentPage="getProducts"></Pagination>
             </div>
           </div>
-          
+
           <!--CATEGORIES-->
           <div class="col-lg-3 col-md-12 order-1 mb-5 mb-md-0">
             <div class="border p-4 rounded mb-4">
@@ -176,125 +176,124 @@
 </template>
 
 <script>
-import Pagination  from '../../components/Utilities/Pagination.vue'
+import Pagination from '../../components/Utilities/Pagination.vue'
 
 export default {
-  components:{
-    Pagination,
+  components: {
+    Pagination
   },
-  data(){
-    return{
-      products:[],
-      allProducts:[],
-      allCategory:[],
-      FilterPorducts:[],
+  data () {
+    return {
+      products: [],
+      allProducts: [],
+      allCategory: [],
+      FilterPorducts: [],
       paginations: {},
-      liked: JSON.parse(localStorage.getItem("Like Item List")) || [],
+      liked: JSON.parse(localStorage.getItem('Like Item List')) || [],
       isLoading: false,
-      status:{
-        loadingItem: '',
+      status: {
+        loadingItem: ''
       },
-      filterValue:'',
+      filterValue: ''
     }
   },
   methods: {
-    getProducts(page = 1){
-      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`;
-      const vm = this;
-      vm.isLoading = true;
+    getProducts (page = 1) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products?page=${page}`
+      const vm = this
+      vm.isLoading = true
       vm.$http.get(api).then((response) => {
-        vm.isLoading = false;
-        vm.products = response.data.products.reverse().filter( function(element, index, array) {
-          return element.is_enabled === 1;
-        });
-        vm.paginations = response.data.pagination;
+        vm.isLoading = false
+        vm.products = response.data.products.reverse().filter(function (element, index, array) {
+          return element.is_enabled === 1
+        })
+        vm.paginations = response.data.pagination
       })
     },
-    getAllProducts(){
-      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`;
-      const vm = this;
+    getAllProducts () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
+      const vm = this
       vm.$http.get(api).then((response) => {
-        vm.isLoading = false;
-        vm.Allproducts = response.data.products.filter(function(element, index, array){
-          return element.is_enabled === 1;
-        });;
-        const result = vm.Allproducts.reduce((object, item) => {
+        vm.isLoading = false
+        vm.Allproducts = response.data.products.filter(function (element, index, array) {
+          return element.is_enabled === 1
+        })
+        vm.Allproducts.reduce((object, item) => {
           if (item.category in object) {
-            object[item.category]++;
-            vm.allCategory.forEach(function(element, index, array){
-              if(element.title === item.category){
-                element.count ++;
+            object[item.category]++
+            vm.allCategory.forEach(function (element, index, array) {
+              if (element.title === item.category) {
+                element.count++
               }
-            });
+            })
+          } else {
+            object[item.category] = 1
+            vm.allCategory.push({ title: item.category, count: 1 })
           }
-          else {
-            object[item.category] = 1;
-            vm.allCategory.push({title: item.category,count: 1})
-          }
-          this.setFilter(this.$route.params.categoryName);
-          return object;
-        }, {});
+          vm.setFilter(vm.$route.params.categoryName)
+          return object
+        }, {})
       })
     },
-    addtoCart( id , qty = 1){
-      const api =`${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      const vm = this;
+    addtoCart (id, qty = 1) {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/cart`
+      const vm = this
       const cart = {
-        product_id : id,
+        product_id: id,
         qty
-      };
-      vm.status.loadingItem = id;
-      this.$http.post(api,{data:cart}).then((response) => {
-        vm.status.loadingItem = '';
-        vm.getProducts();
-        vm.$bus.$emit('message:push',response.data.message,'success');
-        vm.$bus.$emit('cart-item','修改購物車icon');
+      }
+      vm.status.loadingItem = id
+      vm.$http.post(api, { data: cart }).then((response) => {
+        vm.status.loadingItem = ''
+        vm.getProducts()
+        vm.$bus.$emit('message:push', response.data.message, 'success')
+        vm.$bus.$emit('cart-item', '修改購物車icon')
       })
     },
-    setFilter(value){
-      const vm = this;
-      if(value == undefined||value == ''){
+    setFilter (value) {
+      const vm = this
+      if (value === undefined || value === '') {
         value = 'all'
       }
-      if(value == 'all'){
-        vm.filterValue = "全部商品";
-        vm.FilterPorducts = [];
-      }else{
-        vm.filterValue = '商品分類：' + value;
-        vm.FilterPorducts = vm.Allproducts.filter(function(element, index, array){
-          return element.category == value;
-        });
+      if (value === 'all') {
+        vm.filterValue = '全部商品'
+        vm.FilterPorducts = []
+      } else {
+        vm.filterValue = '商品分類：' + value
+        vm.FilterPorducts = vm.Allproducts.filter(function (element, index, array) {
+          return element.category === value
+        })
       }
     },
-    setOrder(num){
-      if(num == 1){
-        this.FilterPorducts = this.FilterPorducts.sort(function(a,b){
-          return a.price - b.price;
-        });
-      }else if(num == 2){
-        this.FilterPorducts = this.FilterPorducts.sort(function(a,b){
-          return  b.price - a.price;
-        });
+    setOrder (num) {
+      if (num === 1) {
+        this.FilterPorducts = this.FilterPorducts.sort(function (a, b) {
+          return a.price - b.price
+        })
+      } else if (num === 2) {
+        this.FilterPorducts = this.FilterPorducts.sort(function (a, b) {
+          return b.price - a.price
+        })
       }
     },
-    EditLikeList(item){
-      const vm =  this;
-      var num = vm.liked.indexOf(item.id)
-      if(num == -1){
-        vm.liked.push(item.id);
-        vm.$bus.$emit('message:push',item.title + '，「加入」願望清單','success');
-      }else{
-        vm.liked.splice( num , 1);
-        vm.$bus.$emit('message:push',item.title + '，「移出」願望清單','warning');
+    EditLikeList (item) {
+      const vm = this
+      const num = vm.liked.indexOf(item.id)
+      if (num === -1) {
+        vm.liked.push(item.id)
+        vm.$bus.$emit('message:push', item.title + '，「加入」願望清單', 'success')
+      } else {
+        vm.liked.splice(num, 1)
+        vm.$bus.$emit('message:push', item.title + '，「移出」願望清單', 'warning')
       }
-      localStorage.setItem('Like Item List', JSON.stringify(vm.liked));
-      vm.getProducts();
-    },
+      localStorage.setItem('Like Item List', JSON.stringify(vm.liked))
+      vm.getProducts()
+    }
   },
-  created() {
-    this.getProducts();
-    this.getAllProducts();
-  },
+  created () {
+    this.getProducts()
+    this.getAllProducts()
+  }
 }
 </script>
 
