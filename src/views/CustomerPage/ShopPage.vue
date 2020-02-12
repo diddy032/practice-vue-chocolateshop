@@ -107,8 +107,8 @@
           <!--CATEGORIES-->
           <div class="col-lg-3 col-md-12 order-1 mb-5 mb-md-0">
             <div class="border p-4 rounded mb-4">
-              <div class="mb-4 d-none d-lg-block d-xl-block">
-                <h3 class="mb-3 h5 text-uppercase text-black d-block font-weight-bold">商品</h3>
+              <div class="d-none d-lg-block d-xl-block">
+                <h3 class="mb-3 h5 text-uppercase text-black d-block font-weight-bold">分類</h3>
                 <ul class="list-unstyled mb-4">
                   <li class="mb-1">
                     <a href="#" class="d-flex font-weight-normal" @click.prevent="setFilter('all')">
@@ -116,23 +116,6 @@
                     </a>
                   </li>
                 </ul>
-              </div>
-              <button class="btn btn-primary btn-block my-3 btn-lg d-lg-none d-xl-none" type="button" data-toggle="collapse" data-target="#category1collapse" aria-expanded="false" aria-controls="category1collapse">
-                商品
-              </button>
-              <div class="collapse show d-lg-none d-xl-none" id="category1collapse">
-                <div class="card card-body border-0">
-                  <ul class="list-unstyled mb-4">
-                    <li class="mb-1">
-                      <a href="#" class="d-flex font-weight-normal" @click.prevent="setFilter('all')">
-                        <span>顯示全部商品</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="d-none d-lg-block d-xl-block">
-                <h3 class="mb-3 h5 text-uppercase text-black d-block font-weight-bold">分類</h3>
                 <ul class="list-unstyled mb-4">
                   <li class="mb-1" v-for="(item, index) in allCategory" :key="index">
                     <a href="#" class="d-flex font-weight-normal" @click.prevent="setFilter(item.title)">
@@ -146,6 +129,13 @@
               </button>
               <div class="collapse" id="category2collapse">
                 <div class="card card-body border-0">
+                  <ul class="list-unstyled mb-4">
+                    <li class="mb-1">
+                      <a href="#" class="d-flex font-weight-normal" @click.prevent="setFilter('all')">
+                        <span>顯示全部商品</span>
+                      </a>
+                    </li>
+                  </ul>
                   <ul class="list-unstyled mb-4">
                     <li class="mb-1" v-for="(item, index) in allCategory" :key="index">
                       <a href="#" class="d-flex font-weight-normal" @click.prevent="setFilter(item.title)">
@@ -171,7 +161,6 @@
         </div>
       </div>
     </div>
-    <router-view></router-view>
   </div>
 </template>
 
@@ -252,6 +241,9 @@ export default {
     },
     setFilter (value) {
       const vm = this
+      const num = vm.allCategory.some(function (element, index, array) {
+        return element.title === value
+      })
       if (value === undefined || value === '') {
         value = 'all'
       }
@@ -259,19 +251,25 @@ export default {
         vm.filterValue = '全部商品'
         vm.FilterPorducts = []
       } else {
-        vm.filterValue = '商品分類：' + value
-        vm.FilterPorducts = vm.Allproducts.filter(function (element, index, array) {
-          return element.category === value
-        })
+        if (num) {
+          vm.filterValue = '商品分類：' + value
+          vm.FilterPorducts = vm.Allproducts.filter(function (element, index, array) {
+            return element.category === value
+          })
+        } else {
+          vm.filterValue = '全部商品'
+          vm.FilterPorducts = []
+        }
       }
     },
     setOrder (num) {
+      const vm = this
       if (num === 1) {
-        this.FilterPorducts = this.FilterPorducts.sort(function (a, b) {
+        vm.FilterPorducts = vm.FilterPorducts.sort(function (a, b) {
           return a.price - b.price
         })
       } else if (num === 2) {
-        this.FilterPorducts = this.FilterPorducts.sort(function (a, b) {
+        vm.FilterPorducts = vm.FilterPorducts.sort(function (a, b) {
           return b.price - a.price
         })
       }

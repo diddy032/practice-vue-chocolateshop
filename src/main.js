@@ -17,7 +17,6 @@ import currencyFilter from './filters/currency'
 import formatDateFilter from './filters/formatDate'
 import productidchangeFilter from './filters/productidchange'
 import './assets/all.scss'
-// import './assets/main.js'
 import './bus'
 window.$ = window.jQuery = jQuery
 Vue.config.productionTip = false

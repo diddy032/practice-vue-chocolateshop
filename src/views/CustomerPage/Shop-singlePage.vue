@@ -52,35 +52,114 @@
           </div>
         </div>
         <div class="row justify-content-center">
-          <div class="col-md-8 col-12 my-4">
-            <nav class="nav nav-pills justify-content-star">
-              <div class="nav nav-tabs mx-md-auto" id="nav-tab" role="tablist">
-                <div class="nav-item nav-link active" id="nav-item-content" data-toggle="tab" href="#nav-content" role="tab" aria-controls="nav-content" aria-selected="true">商品介紹</div>
-                <div class="nav-item nav-link" id="nav-item-info" data-toggle="tab" href="#nav-info" role="tab" aria-controls="nav-info" aria-selected="false">商品資訊</div>
+          <div class="col-12 my-4">
+            <div class="nav nav-pills" id="nav-tab" role="tablist">
+              <div class="nav-item nav-link active" id="nav-item-content" data-toggle="tab" href="#nav-content" role="tab" aria-controls="nav-content" aria-selected="true">商品介紹</div>
+              <div class="nav-item nav-link" id="nav-item-info" data-toggle="tab" href="#nav-info" role="tab" aria-controls="nav-info" aria-selected="false">商品資訊</div>
+              <div class="nav-item nav-link" id="nav-item-question" data-toggle="tab" href="#nav-question" role="tab" aria-controls="nav-question" aria-selected="false">常見問題</div>
+            </div>
+            <hr class="my-0">
+            <div class="tab-content text-dark" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="nav-content" role="tabpanel" aria-labelledby="nav-item-content">
+                {{product.content}}
               </div>
-            </nav>
-            <hr class="my-1">
-            <div class="tab-content" id="nav-tabContent">
-              <div class="tab-pane fade show active" id="nav-content" role="tabpanel" aria-labelledby="nav-item-content">{{product.content}}</div>
               <div class="tab-pane fade" id="nav-info" role="tabpanel" aria-labelledby="nav-item-info">
-                <table class="table table-borderless txet-left">
+                <table class="table txet-left table-striped">
                   <tr>
-                    <th scope="row">製造方式:</th>
+                    <th scope="row">製造方式</th>
                     <td>手工製造</td>
                   </tr>
                   <tr>
-                    <th scope="row">商品產地:</th>
+                    <th scope="row">商品產地</th>
                     <td>台灣</td>
                   </tr>
                   <tr>
-                    <th scope="row">分類:</th>
+                    <th scope="row">分類</th>
                     <td>{{product.category}}</td>
                   </tr>
                   <tr>
-                    <th scope="row">單位:</th>
+                    <th scope="row">單位</th>
                     <td>{{product.unit}}</td>
                   </tr>
                 </table>
+              </div>
+              <div class="tab-pane fade" id="nav-question" role="tabpanel" aria-labelledby="nav-item-question">
+                <ul>
+                  <li>採接單新鮮製作，無存貨甜點</li>
+                  <li>無實體門市，工作室無對外開放</li>
+                  <li>可訂購每週三、六取貨/配送</li>
+                  <li>全台可宅配，可指定上/下午配達</li>
+                  <li>宅配出貨皆不附提袋</li>
+                </ul>
+                =======
+                保存方式
+                =======
+
+                ✓ 最佳賞味期約 30 天
+                ✓ 常溫保存，請避免高溫、潮濕、日光直射
+                ✓ 餅乾無添加防腐劑，開封後請儘快食用完畢，以免餅乾受潮軟化。
+
+                ============
+                國際運送小提醒
+                ============
+
+                餅乾類 -
+                由於餅乾經海外運送，途經 2 次轉運過程中，
+                容易產生餅乾碎裂情形，再請您多多見諒 ^^
+
+                蛋糕點心類 -
+                由於產品時效性較短，海外運送天數預估為 5~7 天左右，
+                有可能送達時會錯過較多的最佳賞味期，再請您斟酌下單唷 ^^
+
+                ============
+                關於指定到貨日
+                ============
+
+                您可以於訂單備註您的希望到貨日，我們會 "盡量" 配合出貨喔 !
+                但不能跟您保證商品 "一定會" 如期送達 (因運送公司的送達時間會因物流及交通狀況略有差異，尤其大節日超商的貨物量較多，易出現延遲到貨情況)
+                倘若運輸上有延誤狀況再請您見諒了^^
+
+                =======
+                運送說明
+                =======
+
+                。若您有 "必須到貨日"， 建議選擇 "宅配運送" !
+                。建議將 "希望到貨日" 設在商品使用的前 1~2 天 !
+                。超商不負責運送易碎物品，有可能造成餅乾碎裂，若您介意請選擇宅配唷!
+                。若您將於重要場合或送禮使用，建議選擇 "宅配運送" 方式會比較保險唷!
+
+                :::::::
+
+                基本運送時間參考:
+                超商取貨 : 需 2 個運送天 (部分特殊門市不適用二日到貨)
+                宅配到府: 需 1~2 個運送天 (週六、週日黑貓不收貨，將於平常日出貨)
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container mt-5">
+          <div class="row justify-content-center">
+            <div class="col-md-7 site-section-heading text-center pt-4 mb-5">
+              <h2>同類商品</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-lg-4 mb-4 mx-auto" v-for="(item, index) in FilterPorducts" :key="index">
+              <div class="block-4 text-center border position-relative">
+                <figure class="block-4-image img-cover">
+                  <router-link :to="`/shopsitem/${item.id}`">
+                    <img :src="item.imageUrl" alt="Image placeholder" class="img-fluid img-hover">
+                  </router-link>
+                </figure>
+                <div class="block-4-text p-4">
+                  <router-link  :to="`/shopsitem/${item.id}`">
+                    <h5>{{item.title}}</h5>
+                  </router-link>
+                  <div class="my-3">
+                    <div class="text-primary font-weight-bold h3 mb-0 mb-2">NT{{item.price | currency}}</div>
+                    <del class="h5">NT{{item.origin_price | currency}}</del>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -95,6 +174,7 @@
 export default {
   data () {
     return {
+      FilterPorducts: [],
       product: {},
       liked: JSON.parse(localStorage.getItem('Like Item List')) || [],
       tempProduct: {
@@ -116,10 +196,22 @@ export default {
         if (response.data.success) {
           vm.isLoading = false
           vm.product = response.data.product
+          vm.setFilter()
         } else {
           vm.$bus.$emit('message:push', response.data.message, 'danger')
           vm.$router.push('/shop')
         }
+      })
+    },
+    setFilter () {
+      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
+      const vm = this
+      vm.$http.get(api).then((response) => {
+        vm.FilterPorducts = response.data.products.filter(function (element, index, array) {
+          return element.category === vm.product.category
+        })
+        vm.FilterPorducts = vm.FilterPorducts.slice(-3).reverse()
+        console.log(vm.FilterPorducts)
       })
     },
     addtoCart (id) {

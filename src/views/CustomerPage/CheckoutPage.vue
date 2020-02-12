@@ -8,22 +8,22 @@
             <h2 class="h3 mb-3 text-black">購買人資訊</h2>
             <div class="p-3 p-lg-5 border" @submit.prevent="createOrder">
               <div class="form-group font-weight-bold">
-                <label for="useremail">信箱 *必填</label>
+                <label for="useremail">信箱 *</label>
                 <input type="email" class="form-control" name="email" id="useremail" :class="{'is-invalid':errors.has('email')}" v-validate="'required|email'" v-model="form.user.email"  placeholder="請輸入 Email" required>
                 <span class="text-danger" v-if="errors.has('email')">{{ errors.first('email') }}</span>
               </div>
               <div class="form-group font-weight-bold">
-                <label for="username">收件人姓名 *必填</label>
+                <label for="username">收件人姓名 *</label>
                 <input type="text" class="form-control" name="name" id="username" :class="{'is-invalid':errors.has('name')}" v-model="form.user.name" v-validate="'required'"  placeholder="輸入姓名">
                 <span class="text-danger" v-if="errors.has('name')">姓名必須輸入</span>
               </div>
               <div class="form-group font-weight-bold">
-                <label for="usertel">收件人電話 *必填</label>
+                <label for="usertel">收件人電話 *</label>
                 <input type="tel" class="form-control" name="usertel" id="usertel" :class="{'is-invalid':errors.has('usertel')}" v-validate="'required|numeric'" v-model="form.user.tel" placeholder="請輸入電話">
                 <span class="text-danger" v-if="errors.has('usertel')">電話必須輸入</span>
               </div>
               <div class="form-group font-weight-bold">
-                <label for="useraddress">收件人地址 *必填</label>
+                <label for="useraddress">收件人地址 *</label>
                 <input type="text" class="form-control" name="address" id="useraddress" v-model="form.user.address" :class="{'is-invalid':errors.has('address')}" v-validate="'required'"
                   placeholder="請輸入地址">
                 <span class="text-danger" v-if="errors.has('address')">地址欄位不得留空</span>

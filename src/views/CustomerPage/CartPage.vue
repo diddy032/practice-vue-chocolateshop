@@ -91,12 +91,14 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <div class="row mb-5">
-              <div class="col-md-6 mb-3 mb-md-0">
-                <button class="btn btn-primary btn-sm btn-block" @click="getCart">更新購物車列表</button>
-              </div>
-              <div class="col-md-6">
-                <router-link type="button" class="btn btn-outline-primary btn-sm btn-block" to="/shop">繼續購物</router-link>
+            <div class="container">
+              <div class="row mb-5">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <button class="btn btn-primary btn-sm btn-block" @click="getCart">更新購物車列表</button>
+                </div>
+                <div class="col-md-6">
+                  <router-link type="button" class="btn btn-outline-primary btn-sm btn-block" to="/shop">繼續購物</router-link>
+                </div>
               </div>
             </div>
             <div class="row">
@@ -112,7 +114,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6 pl-5">
+          <div class="col-md-6 pl-md-5">
             <div class="row justify-content-end">
               <div class="col-md-7">
                 <div class="row">
@@ -121,18 +123,18 @@
                   </div>
                 </div>
                 <div class="row mb-3" v-if="cart.total !== cart.final_total">
-                  <div class="col-md-6">
+                  <div class="col-6">
                     <span class="text-black">購買總金額</span>
                   </div>
-                  <div class="col-md-6 text-right">
+                  <div class="col-6 text-right">
                     <strong class="text-black">{{cart.total | currency}}</strong>
                   </div>
                 </div>
                 <div class="row mb-3 text-danger" v-if="cart.total !== cart.final_total">
-                  <div class="col-md-6">
+                  <div class="col-6">
                     <span class="">優惠券折抵</span>
                   </div>
-                  <div class="col-md-6 text-right">
+                  <div class="col-6 text-right">
                     <strong class="">-{{cart.total-cart.final_total | currency}}</strong>
                   </div>
                 </div>
@@ -145,8 +147,10 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-md-12">
-                    <router-link type="button" to="/checkout" class="btn btn-primary btn-lg py-3 btn-block">前往結帳</router-link>
+                  <div class="container">
+                    <div class="col-md-12">
+                      <router-link type="button" to="/checkout" class="btn btn-primary btn-lg py-3 btn-block">前往結帳</router-link>
+                    </div>
                   </div>
                 </div>
               </div>

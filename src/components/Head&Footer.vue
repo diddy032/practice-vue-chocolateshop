@@ -8,7 +8,7 @@
             <div class="row align-items-center">
               <div class="col-12 col-lg-3 my-1 mb-md-0 order-1 order-md-1 text-center text-lg-left">
                 <router-link to="/home" class="site-logo">
-                  <img src="../assets/images/chocolate-logo.svg" class="js-logo-clone" alt="" height="90px">
+                  <img src="../assets/images/chocolate-logo.jpg" class="js-logo-clone" alt="" height="50px">
                 </router-link>
               </div>
               <div class="col-12 col-lg-7 mb-md-0 order-3 order-md-2 text-center">
@@ -44,11 +44,11 @@
               <div class="col-12 col-lg-2 mt-md-0 order-2 order-md-3 text-center text-lg-right mt-2 mt-md-3 mt-lg-0">
                 <div class="site-top-icons">
                   <ul>
-                    <li>
-                      <router-link to="/login"><i class="fas fa-user fa-lg"></i></router-link>
+                    <li class="mr-2">
+                      <router-link to="/login"><i class="fas fa-user "></i></router-link>
                     </li>
-                    <li>
-                      <router-link to="/wishlist"><i class="far fa-heart fa-lg"></i></router-link>
+                    <li class="mr-2">
+                      <router-link to="/wishlist"><i class="far fa-heart "></i></router-link>
                     </li>
                     <li>
                       <router-link to="/cart" class="site-cart">
@@ -134,7 +134,6 @@
 import Alert from './Utilities/AlertMessageCus.vue'
 import CarIcon from './Utilities/CarIcon.vue'
 import $ from 'jquery'
-// import '../assets/main.js'
 
 export default {
   components: {

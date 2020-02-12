@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="site-blocks-cover" data-aos="fade-down">
+    <div class="site-blocks-cover">
       <div class="container">
         <div class="row align-items-center justify-content-end">
           <div class="col-md-5 text-center text-md-left pt-5 pt-md-0">
@@ -15,45 +15,7 @@
         </div>
       </div>
     </div>
-    <div class="site-section site-blocks-2">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="">
-            <a class="block-2-item" href="#" @click.prevent="toCategory('巧克力蛋糕')">
-              <figure class="image">
-                <img src="../../assets/images/collections-2.jpg" alt="" class="img-fluid">
-              </figure>
-              <div class="text">
-                <span class="text-uppercase">商品分類</span>
-                <h3>巧克力蛋糕</h3>
-              </div>
-            </a>
-          </div>
-          <div class="col-sm-12 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
-            <a class="block-2-item" href="#" @click.prevent="toCategory('巧克力餅乾')">
-              <figure class="image">
-                <img src="../../assets/images/collections-3.jpg" alt="" class="img-fluid">
-              </figure>
-              <div class="text">
-                <span class="text-uppercase">商品分類</span>
-                <h3>巧克力餅乾</h3>
-              </div>
-            </a>
-          </div>
-          <div class="col-sm-12 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
-            <a class="block-2-item" href="#"  @click.prevent="toCategory('濃醇巧克力')">
-              <figure class="image">
-                <img src="../../assets/images/collections-1.jpg" alt="" class="img-fluid">
-              </figure>
-              <div class="text">
-                <span class="text-uppercase">商品分類</span>
-                <h3>濃醇巧克力</h3>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ItemCategories></ItemCategories>
     <div class="site-section block-3 site-blocks-2 bg-light">
       <div class="container">
         <div class="row justify-content-center">
@@ -84,7 +46,7 @@
     </div>
     <div class="site-section block-8">
       <div class="container">
-        <div class="row justify-content-center  mb-5">
+        <div class="row justify-content-center mb-5">
           <div class="col-md-7 site-section-heading text-center pt-4">
             <h2>禮盒推薦</h2>
           </div>
@@ -108,9 +70,12 @@
 
 <script>
 import carousel from 'vue-owl-carousel'
-
+import ItemCategories from '../../components/Utilities/ItemCategories.vue'
 export default {
-  components: { carousel },
+  components: {
+    carousel,
+    ItemCategories
+  },
   data () {
     return {
       products: []

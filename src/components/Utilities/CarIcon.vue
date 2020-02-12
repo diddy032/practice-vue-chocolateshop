@@ -1,6 +1,6 @@
 <template>
   <div>
-    <i class="fas fa-shopping-cart fa-lg"></i>
+    <i class="fas fa-shopping-cart"></i>
     <span class="count" v-if="ItemConut>0">{{ItemConut}}</span>
   </div>
 </template>
