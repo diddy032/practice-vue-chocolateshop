@@ -18,7 +18,7 @@
               <th>折扣碼</th>
               <th width="200" >到期日</th>
               <th>百分比</th>
-              <th>是否啟用</th>
+              <th width="100">是否啟用</th>
               <th class="text-center" width="120">編輯</th>
               <th class="text-center" width="120">刪除</th>
             </tr>
@@ -29,7 +29,7 @@
               <td> {{item.code}}</td>
               <td> {{item.due_date  | formatDate}}</td>
               <td> {{item.percent}}</td>
-              <td>
+              <td class="text-center">
                 <span class="text-success" v-if="item.is_enabled">啟用</span>
                 <span v-else>未啟用</span>
               </td>

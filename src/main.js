@@ -13,6 +13,7 @@ import VueI18n from 'vue-i18n'
 import 'animate.css'
 import AOS from 'aos'
 import carousel from 'vue-owl-carousel'
+import VueZoomer from 'vue-zoomer'
 import currencyFilter from './filters/currency'
 import formatDateFilter from './filters/formatDate'
 import productidchangeFilter from './filters/productidchange'
@@ -29,6 +30,7 @@ Vue.use(VeeValidate, { classes: true })
 VeeValidate.Validator.localize('zhTW', zhTW)
 Vue.use(VueI18n)
 Vue.use(carousel)
+Vue.use(VueZoomer)
 Vue.filter('currency', currencyFilter)
 Vue.filter('formatDate', formatDateFilter)
 Vue.filter('filterId', productidchangeFilter)

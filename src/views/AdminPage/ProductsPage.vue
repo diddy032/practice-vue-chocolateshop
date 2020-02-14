@@ -19,8 +19,8 @@
               <th width="120">原價</th>
               <th width="120">售價</th>
               <th width="100">是否啟用</th>
-              <th class="text-center" width="80">編輯</th>
-              <th class="text-center" width="80">刪除</th>
+              <th class="text-center" width="120">編輯</th>
+              <th class="text-center" width="120">刪除</th>
             </tr>
           </thead>
           <tbody>
@@ -33,7 +33,7 @@
               <td class="text-right">
                 {{item.price | currency}}
               </td>
-              <td>
+              <td class="text-center">
                 <span class="text-success" v-if="item.is_enabled">啟用</span>
                 <span v-else>未啟用</span>
               </td>

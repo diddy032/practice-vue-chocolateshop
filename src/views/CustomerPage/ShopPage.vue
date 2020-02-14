@@ -46,15 +46,21 @@
                       <del class="h5">NT{{item.origin_price | currency}}</del>
                     </div>
                     <div class="d-flex justify-content-around">
-                      <router-link type="button"  :to="`/shopsitem/${item.id}`" class="btn btn-outline-info btn-sm my-3">
-                        <i class="fas fa-tag mr-2"></i>
-                        查看更多
-                      </router-link>
-                      <button type="button" class="btn btn-outline-primary btn-sm my-3" @click="addtoCart(item.id)">
-                        <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
-                        <i class="fas fa-shopping-cart mr-2"></i>
-                        加到購物車
-                      </button>
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-md-6"><router-link type="button"  :to="`/shopsitem/${item.id}`" class="btn btn-outline-info btn-sm btn-block my-md-3 my-1">
+                            <i class="fas fa-tag mr-2"></i>
+                            查看更多
+                          </router-link></div>
+                          <div class="col-md-6">
+                            <button type="button" class="btn btn-outline-primary btn-sm btn-block my-md-3 my-0" @click="addtoCart(item.id)">
+                              <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
+                              <i v-else class="fas fa-shopping-cart mr-2"></i>
+                              加到購物車
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -86,15 +92,21 @@
                         <del class="h5">NT{{item.origin_price | currency}}</del>
                       </div>
                       <div class="d-flex justify-content-around">
-                        <router-link type="button"  :to="`/shopsitem/${item.id}`" class="btn btn-outline-info btn-sm my-3">
-                          <i class="fas fa-tag mr-2"></i>
-                          查看更多
-                        </router-link>
-                        <button type="button" class="btn btn-outline-primary btn-sm my-3" @click="addtoCart(item.id)">
-                          <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
-                          <i class="fas fa-shopping-cart mr-2"></i>
-                          加到購物車
-                        </button>
+                        <div class="container px-md-0 px-3">
+                          <div class="row">
+                            <div class="col-md-6 px-0"><router-link type="button"  :to="`/shopsitem/${item.id}`" class="btn btn-outline-info btn-sm btn-block my-md-3 my-1">
+                              <i class="fas fa-tag mr-2"></i>
+                              查看更多
+                            </router-link></div>
+                            <div class="col-md-6 px-0">
+                              <button type="button" class="btn btn-outline-primary btn-sm btn-block my-md-3 my-0" @click="addtoCart(item.id)">
+                                <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
+                                <i v-else class="fas fa-shopping-cart mr-2"></i>
+                                加到購物車
+                              </button>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -234,7 +246,6 @@ export default {
       vm.status.loadingItem = id
       vm.$http.post(api, { data: cart }).then((response) => {
         vm.status.loadingItem = ''
-        vm.getProducts()
         vm.$bus.$emit('message:push', response.data.message, 'success')
         vm.$bus.$emit('cart-item', '修改購物車icon')
       })
@@ -285,7 +296,6 @@ export default {
         vm.$bus.$emit('message:push', item.title + '，「移出」願望清單', 'warning')
       }
       localStorage.setItem('Like Item List', JSON.stringify(vm.liked))
-      vm.getProducts()
     }
   },
   created () {

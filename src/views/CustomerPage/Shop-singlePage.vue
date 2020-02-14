@@ -18,7 +18,17 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <img :src="product.imageUrl" alt="Image" class="img-fluid">
+            <v-zoomer ref="zoomer" style="border: solid 1px silver;" :max-scale="5" :zoomed.sync="zoomed">
+              <img
+                :src="product.imageUrl"
+                style="object-fit: contain; width: 100%; height: 100%;"
+              >
+            </v-zoomer>
+            <div class="d-flex justify-content-center mt-2">
+              <button type="button" class="btn btn-outline-primary mr-1" @click="$refs.zoomer.zoomIn()"><i class="fas fa-search-plus"></i></button>
+              <button type="button" class="btn btn-outline-primary mr-1" @click="$refs.zoomer.zoomOut()"><i class="fas fa-search-minus"></i></button>
+              <button type="button" class="btn btn-outline-primary" @click="$refs.zoomer.reset()">重設</button>
+            </div>
           </div>
           <div class="col-md-6">
             <h2 class="text-black">{{product.title}}</h2>
@@ -39,7 +49,11 @@
               </div>
             </div>
             <div class="d-flex">
-              <button type="button" @click.prevent="addtoCart(product.id)" class="buy-now btn btn-sm btn-primary">加入購物車</button>
+              <button type="button" @click.prevent="addtoCart(product.id)" class="buy-now btn btn-sm btn-primary">
+                <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === tempProduct.id"></i>
+                <i v-else class="fas fa-shopping-cart mr-2"></i>
+                加入購物車
+              </button>
               <div class="mx-3">
                 <div class="text-primary position-absolute" style=" z-index: 3;" @click="EditLikeList(product.id)">
                   <div class="like-farme-iton text-danger">
@@ -60,7 +74,7 @@
             </div>
             <hr class="my-0">
             <div class="tab-content text-dark" id="nav-tabContent">
-              <div class="tab-pane fade show active" id="nav-content" role="tabpanel" aria-labelledby="nav-item-content">
+              <div class="tab-pane fade show active pre-line" id="nav-content" role="tabpanel" aria-labelledby="nav-item-content">
                 {{product.content}}
               </div>
               <div class="tab-pane fade" id="nav-info" role="tabpanel" aria-labelledby="nav-item-info">
@@ -84,55 +98,44 @@
                 </table>
               </div>
               <div class="tab-pane fade" id="nav-question" role="tabpanel" aria-labelledby="nav-item-question">
-                <ul>
-                  <li>採接單新鮮製作，無存貨甜點</li>
-                  <li>無實體門市，工作室無對外開放</li>
-                  <li>可訂購每週三、六取貨/配送</li>
-                  <li>全台可宅配，可指定上/下午配達</li>
-                  <li>宅配出貨皆不附提袋</li>
-                </ul>
-                =======
-                保存方式
-                =======
-
-                ✓ 最佳賞味期約 30 天
-                ✓ 常溫保存，請避免高溫、潮濕、日光直射
-                ✓ 餅乾無添加防腐劑，開封後請儘快食用完畢，以免餅乾受潮軟化。
-
-                ============
-                國際運送小提醒
-                ============
-
-                餅乾類 -
-                由於餅乾經海外運送，途經 2 次轉運過程中，
-                容易產生餅乾碎裂情形，再請您多多見諒 ^^
-
-                蛋糕點心類 -
-                由於產品時效性較短，海外運送天數預估為 5~7 天左右，
-                有可能送達時會錯過較多的最佳賞味期，再請您斟酌下單唷 ^^
-
-                ============
-                關於指定到貨日
-                ============
-
-                您可以於訂單備註您的希望到貨日，我們會 "盡量" 配合出貨喔 !
-                但不能跟您保證商品 "一定會" 如期送達 (因運送公司的送達時間會因物流及交通狀況略有差異，尤其大節日超商的貨物量較多，易出現延遲到貨情況)
-                倘若運輸上有延誤狀況再請您見諒了^^
-
-                =======
-                運送說明
-                =======
-
-                。若您有 "必須到貨日"， 建議選擇 "宅配運送" !
-                。建議將 "希望到貨日" 設在商品使用的前 1~2 天 !
-                。超商不負責運送易碎物品，有可能造成餅乾碎裂，若您介意請選擇宅配唷!
-                。若您將於重要場合或送禮使用，建議選擇 "宅配運送" 方式會比較保險唷!
-
-                :::::::
-
-                基本運送時間參考:
-                超商取貨 : 需 2 個運送天 (部分特殊門市不適用二日到貨)
-                宅配到府: 需 1~2 個運送天 (週六、週日黑貓不收貨，將於平常日出貨)
+                <div>
+                  <div class="h5">保存方式</div>
+                  <div>
+                    ✓ 最佳賞味期約 30 天<br>
+                    ✓ 常溫保存，請避免高溫、潮濕、日光直射<br>
+                    ✓ 餅乾無添加防腐劑，開封後請儘快食用完畢，以免餅乾受潮軟化。<br>
+                  </div>
+                  ============<br>
+                  <div class="h5">國際運送小提醒</div>
+                  <div>
+                    餅乾類 -<br>
+                    由於餅乾經海外運送，途經 2 次轉運過程中，容易產生餅乾碎裂情形，再請您多多見諒 ^^<br>
+                    蛋糕點心類 -<br>
+                    由於產品時效性較短，海外運送天數預估為 5~7 天左右，有可能送達時會錯過較多的最佳賞味期，再請您斟酌下單唷 ^^<br>
+                  </div>
+                  ============<br>
+                  <div class="h5">關於指定到貨日</div>
+                  <div>
+                    您可以於訂單備註您的希望到貨日，我們會 "盡量" 配合出貨喔 !<br>
+                    但不能跟您保證商品 "一定會" 如期送達 (因運送公司的送達時間會因物流及交通狀況略有差異，尤其大節日超商的貨物量較多，易出現延遲到貨情況)
+                    倘若運輸上有延誤狀況再請您見諒了^^<br>
+                  </div>
+                  ============<br>
+                  <div class="h5">運送說明</div>
+                  <div>
+                    <ul>
+                      <li>若您有 "必須到貨日"， 建議選擇 "宅配運送" !</li>
+                      <li>建議將 "希望到貨日" 設在商品使用的前 1~2 天 !</li>
+                      <li>超商不負責運送易碎物品，有可能造成餅乾碎裂，若您介意請選擇宅配唷!</li>
+                      <li>若您將於重要場合或送禮使用，建議選擇 "宅配運送" 方式會比較保險唷!</li>
+                    </ul>
+                  </div>
+                  ============<br>
+                  <div class="h5">運送說明</div>
+                  基本運送時間參考:<br>
+                  超商取貨 : 需 2 個運送天 (部分特殊門市不適用二日到貨)<br>
+                  宅配到府: 需 1~2 個運送天 (週六、週日黑貓不收貨，將於平常日出貨)<br>
+                </div>
               </div>
             </div>
           </div>
@@ -144,24 +147,24 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12 col-lg-4 mb-4 mx-auto" v-for="(item, index) in FilterPorducts" :key="index">
-              <div class="block-4 text-center border position-relative">
-                <figure class="block-4-image img-cover">
-                  <router-link :to="`/shopsitem/${item.id}`">
-                    <img :src="item.imageUrl" alt="Image placeholder" class="img-fluid img-hover">
-                  </router-link>
-                </figure>
-                <div class="block-4-text p-4">
-                  <router-link  :to="`/shopsitem/${item.id}`">
-                    <h5>{{item.title}}</h5>
-                  </router-link>
-                  <div class="my-3">
-                    <div class="text-primary font-weight-bold h3 mb-0 mb-2">NT{{item.price | currency}}</div>
-                    <del class="h5">NT{{item.origin_price | currency}}</del>
-                  </div>
+            <div class="col-md-12">
+              <carousel :margin="20" :loop="false" :nav="false" :autoplay="false" v-if="FilterPorducts && FilterPorducts.length" :responsive="{0:{items:1,nav:false},800:{items:2,nav:false},1000:{items:3,nav:false}}">
+                <div class="item" v-for="(item, index) in FilterPorducts" :key="index">
+                  <a href="#" @click.prevent="getNewProduct(item.id)">
+                    <div class="block-4 text-center">
+                      <figure class="block-4-image">
+                          <img :src="item.imageUrl" alt="Image placeholder" class="img-fluid">
+                      </figure>
+                      <div class="block-4-text p-4">
+                        <h3 class="mb-3"><a href="#" @click.prevent="getNewProduct(item.id)">{{item.title}}</a></h3>
+                        <div class="text-primary font-weight-bold h4 mb-0 mb-2" @click.prevent="getNewProduct(item.id)">NT{{item.price | currency}}</div>
+                      </div>
+                    </div>
+                  </a>
                 </div>
-              </div>
+              </carousel>
             </div>
+            <ItemCategories/>
           </div>
         </div>
       </div>
@@ -170,8 +173,13 @@
 </template>
 
 <script>
-
+import carousel from 'vue-owl-carousel'
+import ItemCategories from '../../components/Utilities/ItemCategories.vue'
 export default {
+  components: {
+    carousel,
+    ItemCategories
+  },
   data () {
     return {
       FilterPorducts: [],
@@ -184,7 +192,8 @@ export default {
       status: {
         loadingItem: ''
       },
-      isLoading: false
+      isLoading: false,
+      zoomed: false
     }
   },
   methods: {
@@ -203,6 +212,12 @@ export default {
         }
       })
     },
+    getNewProduct (NewId) {
+      const vm = this
+      vm.tempProduct.id = NewId
+      vm.getProduct()
+      window.scrollTo(0, 0)
+    },
     setFilter () {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       const vm = this
@@ -211,7 +226,6 @@ export default {
           return element.category === vm.product.category
         })
         vm.FilterPorducts = vm.FilterPorducts.slice(-3).reverse()
-        console.log(vm.FilterPorducts)
       })
     },
     addtoCart (id) {
@@ -289,5 +303,8 @@ export default {
     &:hover .like-iton{
       color: #dc3545;
     }
+  }
+  .pre-line {
+   white-space: pre-line;
   }
 </style>

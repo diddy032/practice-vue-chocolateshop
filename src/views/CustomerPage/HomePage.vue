@@ -86,7 +86,9 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       const vm = this
       vm.$http.get(api).then((response) => {
-        vm.products = (response.data.products.slice(-6)).reverse()
+        vm.products = (response.data.products.slice(-6)).reverse().filter(function (element, index, array) {
+          return element.is_enabled === 1
+        })
       })
     },
     toCategory (Name) {

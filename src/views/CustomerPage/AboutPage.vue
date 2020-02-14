@@ -10,8 +10,6 @@
             <p>生命中的苦澀甜美就如同巧克力一樣令人著迷。對於喜愛品嘗巧克力的我來說，想要把製作出來的巧克力變成回憶的一部份</p>
             <p>讓品嘗我親手的巧克力的所有人，能夠回憶過去、紀錄當下。</p>
             <p>喜望你也能喜歡我的巧克力，並成為愛巧克力的一份子:)</p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum eaque nesciunt doloribus accusantium suscipit dolorem voluptatem, atque, placeat consequatur commodi itaque nihil maxime ex sequi necessitatibus sint assumenda fugiat consequuntur?
-            Fuga quisquam, doloremque illo est accusamus nostrum quis ea. Molestiae doloremque dolorem atque sit dignissimos sed? Pariatur, maxime repellendus, dignissimos repudiandae laborum in voluptatem, architecto suscipit iure hic quasi ex!
           </div>
           <div class="col-md-1"></div>
           <div class="col-md-5">

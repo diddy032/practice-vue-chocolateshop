@@ -13,7 +13,7 @@
             <th>購買款項</th>
             <th width="100">應付金額</th>
             <th width="100">是否付款</th>
-            <th class="text-center">編輯</th>
+            <th class="text-center" width="120">編輯</th>
           </tr>
         </thead>
         <tbody v-for="(item, index) in orders" :key="index">
@@ -28,7 +28,7 @@
             <td class="text-right">
               {{item.total | currency}}
             </td>
-            <td>
+            <td class="text-center">
               <span v-if="item.is_paid" class="text-success">已付款</span>
               <span v-else class="text-danger">尚未付款</span>
             </td>
