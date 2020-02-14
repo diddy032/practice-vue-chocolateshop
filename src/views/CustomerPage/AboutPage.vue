@@ -3,16 +3,16 @@
     <div class="site-section border-bottom" data-aos="fade">
       <div class="container">
         <div class="row mb-5">
-          <div class="col-md-6">
+          <div class="col-md-7">
             <div class="site-section-heading pt-3 mb-4">
               <h2 class="text-black">我們的故事</h2>
             </div>
             <p>生命中的苦澀甜美就如同巧克力一樣令人著迷。對於喜愛品嘗巧克力的我來說，想要把製作出來的巧克力變成回憶的一部份</p>
             <p>讓品嘗我親手的巧克力的所有人，能夠回憶過去、紀錄當下。</p>
             <p>喜望你也能喜歡我的巧克力，並成為愛巧克力的一份子:)</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae porro dolore nostrum commodi deleniti optio sequi nobis, id animi in, ullam, facere sed natus culpa ad omnis iure. Autem, error.Ex saepe quo praesentium. Vel temporibus porro inventore fugiat dolorum totam explicabo tenetur, eius perferendis repellendus sint et, illum amet iste voluptates qui veniam animi commodi alias expedita similique fuga?</p>
           </div>
-          <div class="col-md-1"></div>
-          <div class="col-md-5">
+          <div class="col-md-5 d-none d-md-block d-lg-block d-xl-none">
             <div class="block-16">
               <figure>
                 <img src="../../assets/images/about-1.jpg" alt="Image placeholder" class="img-fluid rounded">
@@ -26,8 +26,8 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="">
-            <div class="icon mr-4 align-self-start">
-              <span class="icon-truck"></span>
+            <div class="icon mr-2 align-self-start">
+              <i class="far fa-thumbs-up text-primary fa-lg"></i>
             </div>
             <div class="text">
               <h2 class="text-primary font-weight-bold">職人工法</h2>
@@ -36,8 +36,8 @@
             </div>
           </div>
           <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="icon mr-4 align-self-start">
-              <span class="icon-refresh2"></span>
+            <div class="icon mr-2 align-self-start">
+              <i class="fas fa-seedling text-primary fa-lg"></i>
             </div>
             <div class="text">
               <h2 class="text-primary font-weight-bold">嚴選食材</h2>
@@ -46,8 +46,8 @@
             </div>
           </div>
           <div class="col-md-6 col-lg-4 d-lg-flex mb-4 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="icon mr-4 align-self-start">
-              <span class="icon-help"></span>
+            <div class="icon mr-2 align-self-start">
+              <i class="fas fa-hand-holding-heart text-primary fa-lg"></i>
             </div>
             <div class="text">
               <h2 class="text-primary font-weight-bold">用心包裝</h2>

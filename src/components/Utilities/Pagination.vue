@@ -4,14 +4,14 @@
       <div class="col-md-12 text-center">
         <div class="site-block-27" aria-label="Page navigation">
           <ul class="pagination font-weight-bold justify-content-center">
-            <li class="page-item" :class="{'disabled':!pages.has_pre}">
+            <li class="page-item mr-2" :class="{'disabled':!pages.has_pre}">
               <a class="page-link"  @click.prevent="changePagination(pages.current_page - 1)">&lt;</a>
             </li>
             <li class="page-item" v-for="page in pages.total_pages" :key="page" :class="{'active':pages.current_page===page}" @click.prevent="changePagination(page)">
-              <span class="page-link" >{{page}}</span>
+              <a class="page-link">{{page}}</a>
             </li>
-            <li class="page-item" :class="{'disabled':!pages.has_next}">
-              <a class="page-link"  @click.prevent="changePagination(pages.current_page + 1)">&gt;</a>
+            <li class="page-item ml-2" :class="{'disabled':!pages.has_next}">
+              <a class="page-link" @click.prevent="changePagination(pages.current_page + 1)">&gt;</a>
             </li>
           </ul>
         </div>
@@ -31,6 +31,7 @@ export default {
   methods: {
     changePagination (page) {
       this.$emit('changeCurrentPage', page)
+      window.scrollTo(0, 0)
     }
   }
 }
