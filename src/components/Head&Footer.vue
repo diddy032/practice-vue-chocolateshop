@@ -6,7 +6,7 @@
         <div class="site-navbar-top">
           <div class="container">
             <div class="row align-items-center">
-              <div class="col-12 col-lg-3 my-1 mb-md-0 order-1 order-md-1 text-center text-lg-left">
+              <div class="col-6 col-md-12 col-lg-3 mb-md-0 order-1 order-md-1 text-left text-md-center text-lg-left">
                 <router-link to="/home" class="site-logo">
                   <img src="../assets/images/chocolate-logo.jpg" class="js-logo-clone" alt="" height="50px">
                 </router-link>
@@ -36,19 +36,37 @@
                             <a :href="href" @click="navigate">我們在這裡</a>
                           </li>
                         </router-link>
+                        <li class="d-xs-block d-sm-block d-md-none">
+                          <ul class="">
+                            <router-link to="/login" v-slot="{ href, route, navigate, isActive }">
+                              <li :class="[isActive && 'active']" @click="ClickMobilMenu">
+                                <a :href="href" @click="navigate" class="px-4"><i class="fas fa-user fa-lg mr-2" @click="navigate"></i>登入</a>
+                              </li>
+                            </router-link>
+                            <router-link to="/wishlist" v-slot="{ href, route, navigate, isActive }">
+                              <li :class="[isActive && 'active']" @click="ClickMobilMenu">
+                                <a :href="href" @click="navigate" class="px-4"><i class="fas fa-heart fa-lg mr-2" @click="navigate"></i>願望清單</a>
+                              </li>
+                            </router-link>
+                          </ul>
+                        </li>
                       </ul>
                     </div>
                   </nav>
                 </div>
               </div>
-              <div class="col-12 col-lg-2 mt-md-0 order-2 order-md-3 text-center text-lg-right mt-2 mt-md-3 mt-lg-0">
+              <div class="col-6 col-md-12 col-lg-2 mt-md-0 order-2 order-md-3 mt-md-3 mt-lg-0">
                 <div class="site-top-icons">
-                  <ul>
-                    <li class="mr-2">
-                      <router-link to="/login"><i class="fas fa-user "></i></router-link>
-                    </li>
-                    <li class="mr-2">
-                      <router-link to="/wishlist"><i class="far fa-heart "></i></router-link>
+                  <ul class="d-flex justify-content-end justify-content-md-center align-items-center">
+                    <li class="d-none d-md-block">
+                      <ul>
+                        <li class="mr-2">
+                          <router-link to="/login"><i class="fas fa-user fa-lg"></i></router-link>
+                        </li>
+                        <li class="mr-2">
+                          <router-link to="/wishlist"><i class="far fa-heart fa-lg"></i></router-link>
+                        </li>
+                      </ul>
                     </li>
                     <li>
                       <router-link to="/cart" class="site-cart">
@@ -56,7 +74,7 @@
                       </router-link>
                     </li>
                     <li class="d-inline-block d-md-none ml-md-0">
-                      <a href="#" class="site-menu-toggle js-menu-toggle" @click.prevent="mobileMenu"><i class="fas fa-bars"></i>
+                      <a href="#" class="site-menu-toggle js-menu-toggle position-static" @click.prevent="mobileMenu"><i class="fas fa-bars"></i>
                       </a>
                     </li>
                   </ul>

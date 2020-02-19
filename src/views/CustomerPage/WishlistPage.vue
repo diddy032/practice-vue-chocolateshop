@@ -135,10 +135,8 @@ export default {
     },
     getWishLish () {
       const vm = this
-      vm.WishItemInfo = vm.products.filter(function (element, index, array) {
-        return vm.WishList.indexOf(element.id) > -1
-      })
-      vm.WishItemInfo.forEach(function (element, index, array) {
+      vm.WishItemInfo = vm.products.filter((element, index, array) => vm.WishList.indexOf(element.id) > -1)
+      vm.WishItemInfo.forEach((element, index, array) => {
         element.qty = 1
       })
     },

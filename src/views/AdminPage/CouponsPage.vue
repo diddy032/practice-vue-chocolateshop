@@ -165,8 +165,8 @@
 </template>
 
 <script>
+/* global $ */
 import Pagination from '../../components/Utilities/Pagination.vue'
-import $ from 'jquery'
 export default {
   components: {
     Pagination
@@ -213,7 +213,7 @@ export default {
         const D = (date.getDate() < 10 ? '0' : '') + date.getDate()
         vm.tempTime = Y + M + D
       }
-      $('#couponModal').modal('show')
+      ('#couponModal').modal('show')
     },
     updateCoupon () {
       let api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/admin/coupon`

@@ -68,11 +68,11 @@
         <div class="row justify-content-center">
           <div class="col-12 my-4">
             <div class="nav nav-pills" id="nav-tab" role="tablist">
-              <div class="nav-item nav-link active" id="nav-item-content" data-toggle="tab" href="#nav-content" role="tab" aria-controls="nav-content" aria-selected="true">商品介紹</div>
-              <div class="nav-item nav-link" id="nav-item-info" data-toggle="tab" href="#nav-info" role="tab" aria-controls="nav-info" aria-selected="false">商品資訊</div>
-              <div class="nav-item nav-link" id="nav-item-question" data-toggle="tab" href="#nav-question" role="tab" aria-controls="nav-question" aria-selected="false">常見問題</div>
+              <div class="nav-item nav-link mr-1 border active" id="nav-item-content" data-toggle="tab" href="#nav-content" role="tab" aria-controls="nav-content" aria-selected="true">商品介紹</div>
+              <div class="nav-item nav-link mr-1 border" id="nav-item-info" data-toggle="tab" href="#nav-info" role="tab" aria-controls="nav-info" aria-selected="false">商品資訊</div>
+              <div class="nav-item nav-link mr-1 border" id="nav-item-question" data-toggle="tab" href="#nav-question" role="tab" aria-controls="nav-question" aria-selected="false">常見問題</div>
             </div>
-            <hr class="my-0">
+            <hr class="my-2">
             <div class="tab-content text-dark" id="nav-tabContent">
               <div class="tab-pane fade show active pre-line" id="nav-content" role="tabpanel" aria-labelledby="nav-item-content">
                 {{product.content}}
@@ -149,7 +149,7 @@
           <div class="row">
             <div class="col-md-12">
               <carousel :margin="20" :loop="false" :nav="false" :autoplay="false" v-if="FilterPorducts && FilterPorducts.length" :responsive="{0:{items:1,nav:false},800:{items:2,nav:false},1000:{items:3,nav:false}}">
-                <div class="item" v-for="(item, index) in FilterPorducts" :key="index">
+                <div class="item border" v-for="(item, index) in FilterPorducts" :key="index">
                   <a href="#" @click.prevent="getNewProduct(item.id)">
                     <div class="block-4 text-center">
                       <figure class="block-4-image">
@@ -222,9 +222,7 @@ export default {
       const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
       const vm = this
       vm.$http.get(api).then((response) => {
-        vm.FilterPorducts = response.data.products.filter(function (element, index, array) {
-          return element.category === vm.product.category
-        })
+        vm.FilterPorducts = response.data.products.filter((element, index, array) => element.category === vm.product.category)
         vm.FilterPorducts = vm.FilterPorducts.slice(-3).reverse()
       })
     },

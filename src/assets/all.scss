@@ -1,10 +1,10 @@
 @import "~bootstrap/scss/functions";
-@import "./helpers/variables";
+@import "./helpers/_scss/variables";
 @import "~bootstrap/scss/bootstrap";
 
-@import './helpers/site-base';
-@import './helpers/site-blocks';
-@import './helpers/site-navbar';
+@import './helpers/_scss/site-base';
+@import './helpers/_scss/site-blocks';
+@import './helpers/_scss/site-navbar';
 
 
 

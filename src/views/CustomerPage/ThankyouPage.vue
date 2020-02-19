@@ -19,7 +19,7 @@
                 </thead>
                 <tbody>
                   <tr v-for="(item, index) in order.products" :key="index">
-                    <td class="align-middle font-weight-bold">{{ item.product_id | filterId(Allproducts)}}</td>
+                    <td class="align-middle font-weight-bold">{{ item.product.title}}</td>
                     <td class="align-middle font-weight-normal">{{ item.qty }}</td>
                     <td class="text-right align-middle font-weight-bold">{{item.total | currency}}</td>
                   </tr>
@@ -79,7 +79,6 @@
 export default {
   data () {
     return {
-      Allproducts: [],
       order: {
         user: {}
       },
@@ -95,13 +94,6 @@ export default {
       vm.$http.get(api).then((response) => {
         vm.isLoading = false
         vm.order = response.data.order
-      })
-    },
-    getProducts () {
-      const api = `${process.env.VUE_APP_APIPATH}/api/${process.env.VUE_APP_CUSTOMPATH}/products/all`
-      const vm = this
-      vm.$http.get(api).then((response) => {
-        vm.Allproducts = response.data.products
       })
     },
     payOrder () {
@@ -123,7 +115,6 @@ export default {
   created () {
     this.orderId = this.$route.params.id
     this.getOrder()
-    this.getProducts()
   }
 }
 </script>

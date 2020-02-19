@@ -48,7 +48,7 @@
           </form>
         </div>
         <div class="row mb-5 d-lg-none d-xl-none">
-          <div class="col-12 col-md-10 mb-4 border-top mx-auto" v-for="(item, index) in cart.carts" :key="index">
+          <div class="col-12 col-md-10 my-2 border-bottom mx-auto" v-for="(item, index) in cart.carts" :key="index">
             <div class="container">
               <div class="row">
                 <div class="col-4 pr-0">
@@ -56,41 +56,40 @@
                     <img :src="item.product.imageUrl" alt="Image" class="figure-img img-fluid rounded">
                   </router-link>
                 </div>
-                <div class="col-8">
+                <div class="col-8 text-right d-flex align-items-center justify-content-end">
+                  <a href="#" @click.prevent="removeCartItem(item.id)" class="btn btn-secondary btn-lg">X</a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-7 pr-0">
                   <router-link :to="`/shopsitem/${item.product_id}`">
-                    <h2 class="h5 text-black">
+                    <h2 class="h6 text-black">
                     {{item.product.title}}
                     </h2>
-                    <div class="text-success" v-if="item.coupon">
-                      已套用優惠券
-                    </div>
                   </router-link>
                 </div>
+                <div class="col-5 text-right text-dark font-weight-bold h6">
+                  <div>X{{item.qty}}</div>
+                  NT{{item.total | currency}}
+                </div>
               </div>
               <div class="row">
-                <div class="col-5">
-                  <div class="text-primary font-weight-bold h5 mb-0 mb-2">NT{{item.product.price | currency}}</div>
-                </div>
-                <div class="col-2 font-weight-bold">
-                  X{{item.qty}}
-                </div>
-                <div class="col-5 text-right font-weight-bold h5">
-                  NT{{item.total | currency}}
-                  <div class="text-success ml-2 h6" v-if="item.coupon">
-                    折扣:-{{cart.total-cart.final_total | currency}}
+                <div class="col-7">
+                  <div class="text-success h6" v-if="item.coupon">
+                    已套用優惠券
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-12 text-center">
-                  <a href="#" @click.prevent="removeCartItem(item.id)" class="btn btn-secondary btn-sm">X</a>
+                <div class="col-5 text-right font-weight-bold">
+                  <div class="text-danger ml-2 h6" v-if="item.coupon">
+                    -{{cart.total-cart.final_total | currency}}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-lg-6">
             <div class="container">
               <div class="row mb-5">
                 <div class="col-md-6 mb-3 mb-md-0">
@@ -102,21 +101,21 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-lg-12">
                 <label class="text-black h4" for="coupon">優惠券</label>
                 <p>如果您有優惠券，請在下方輸入優惠券代碼</p>
               </div>
-              <div class="col-md-8 mb-3 mb-md-0">
+              <div class="col-lg-8 mb-3 mb-md-0">
                 <input type="text" class="form-control py-3" id="coupon" placeholder="輸入優惠券代碼" v-model="coupon_code">
               </div>
-              <div class="col-md-4">
+              <div class="col-lg-4">
                 <button class="btn btn-primary btn-sm" @click="addCouponCode">套用優惠碼</button>
               </div>
             </div>
           </div>
-          <div class="col-md-6 pl-md-5">
+          <div class="col-lg-6 pl-lg-5">
             <div class="row justify-content-end">
-              <div class="col-md-7">
+              <div class="col-lg-7">
                 <div class="row">
                   <div class="col-md-12 text-right border-bottom mb-5">
                     <h3 class="text-black h4 text-uppercase">付款資訊</h3>

@@ -126,8 +126,8 @@
 </template>
 
 <script>
+/* global $ */
 import Pagination from '../../components/Utilities/Pagination.vue'
-import $ from 'jquery'
 export default {
   components: {
     Pagination
@@ -182,10 +182,6 @@ export default {
         $('#orderModal').modal('hide')
         vm.getOrders()
       })
-    }
-  },
-  watch: {
-    tempOrder () {
     }
   },
   created () {

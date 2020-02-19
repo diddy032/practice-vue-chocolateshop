@@ -42,7 +42,7 @@
                   <table class="table site-block-order-table mb-5">
                     <thead>
                       <th>產品名稱</th>
-                      <th>數量</th>
+                      <th class="text-center">數量</th>
                       <th class="text-right">價格</th>
                     </thead>
                     <tbody>
@@ -56,8 +56,7 @@
                             未套用優惠券
                           </div>
                         </td>
-                        <td class="text-primary font-weight-normal">
-                          <strong class="mx-2 my-auto">x</strong>
+                        <td class="text-primary font-weight-normal text-center">
                           {{item.qty}}
                         </td>
                         <td class="text-primary text-right font-weight-normal">
@@ -74,7 +73,7 @@
                       已使用的優惠券
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
-                      <small class="text-muted font-weight-bold text-primary">優惠券名</small>
+                      <small class="text-muted font-weight-bold text-primary">折扣券名</small>
                       <div class="h6 text-left font-weight-bold text-primary">{{Coupon.title}}</div>
                     </div>
                     <div class="d-flex justify-content-between">

@@ -17,11 +17,9 @@ import VueZoomer from 'vue-zoomer'
 import currencyFilter from './filters/currency'
 import formatDateFilter from './filters/formatDate'
 import productidchangeFilter from './filters/productidchange'
-import './assets/all.scss'
 import './bus'
-window.$ = window.jQuery = jQuery
+global.$ = global.jQuery = jQuery
 Vue.config.productionTip = false
-window.Bootstrap = require('bootstrap')
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
 axios.defaults.withCredentials = true
@@ -46,7 +44,6 @@ Vue.use(VeeValidate, {
   }
 })
 
-AOS.init()
 AOS.init({
   duration: 800,
   easing: 'slide',

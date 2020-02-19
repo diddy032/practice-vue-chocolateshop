@@ -62,8 +62,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "../../assets/helpers/login-main.css";
-  @import "../../assets/helpers/login-util.css";
+  @import "../../assets/helpers/_scss/login-main.scss";
+  @import "../../assets/helpers/_scss/login-util.scss";
 
   .img-cover{
     background-image: url("../../assets/images/login.jpg");

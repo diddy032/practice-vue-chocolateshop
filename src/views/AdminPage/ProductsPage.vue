@@ -206,8 +206,8 @@
 </template>
 
 <script>
+/* global $ */
 import Pagination from '../../components/Utilities/Pagination.vue'
-import $ from 'jquery'
 
 export default {
   components: {
@@ -261,7 +261,6 @@ export default {
 
       vm.$validator.validate().then(valid => {
         if (!valid) {
-          // do stuff if not valid.
           vm.$bus.$emit('message:push', '欄位不完整', 'danger')
         } else {
           vm.$http[httpMethod](api, { data: vm.tempProduct }).then((response) => {

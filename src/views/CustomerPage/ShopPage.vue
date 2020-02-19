@@ -92,14 +92,14 @@
                         <del class="h5">NT{{item.origin_price | currency}}</del>
                       </div>
                       <div class="d-flex justify-content-around">
-                        <div class="container px-md-0 px-3">
+                        <div class="container px-md-0 px-2">
                           <div class="row">
-                            <div class="col-md-6 px-0"><router-link type="button"  :to="`/shopsitem/${item.id}`" class="btn btn-outline-info btn-sm btn-block my-md-3 my-1">
+                            <div class="col-lg-12 px-0"><router-link type="button"  :to="`/shopsitem/${item.id}`" class="btn btn-outline-info btn-sm btn-block my-md-2 my-1">
                               <i class="fas fa-tag mr-2"></i>
                               查看更多
                             </router-link></div>
-                            <div class="col-md-6 px-0">
-                              <button type="button" class="btn btn-outline-primary btn-sm btn-block my-md-3 my-0" @click="addtoCart(item.id)">
+                            <div class="col-lg-12 px-0">
+                              <button type="button" class="btn btn-outline-primary btn-sm btn-block my-md-1 my-0" @click="addtoCart(item.id)">
                                 <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
                                 <i v-else class="fas fa-shopping-cart mr-2"></i>
                                 加到購物車
@@ -205,9 +205,7 @@ export default {
       vm.isLoading = true
       vm.$http.get(api).then((response) => {
         vm.isLoading = false
-        vm.products = response.data.products.reverse().filter(function (element, index, array) {
-          return element.is_enabled === 1
-        })
+        vm.products = response.data.products.reverse().filter((element, index, array) => element.is_enabled === 1)
         vm.paginations = response.data.pagination
       })
     },
@@ -216,13 +214,11 @@ export default {
       const vm = this
       vm.$http.get(api).then((response) => {
         vm.isLoading = false
-        vm.Allproducts = response.data.products.filter(function (element, index, array) {
-          return element.is_enabled === 1
-        })
+        vm.Allproducts = response.data.products.filter((element, index, array) => element.is_enabled === 1)
         vm.Allproducts.reduce((object, item) => {
           if (item.category in object) {
             object[item.category]++
-            vm.allCategory.forEach(function (element, index, array) {
+            vm.allCategory.forEach((element, index, array) => {
               if (element.title === item.category) {
                 element.count++
               }
@@ -264,9 +260,7 @@ export default {
       } else {
         if (num) {
           vm.filterValue = '商品分類：' + value
-          vm.FilterPorducts = vm.Allproducts.filter(function (element, index, array) {
-            return element.category === value
-          })
+          vm.FilterPorducts = vm.Allproducts.filter((element, index, array) => element.category === value)
         } else {
           vm.filterValue = '全部商品'
           vm.FilterPorducts = []
@@ -276,13 +270,9 @@ export default {
     setOrder (num) {
       const vm = this
       if (num === 1) {
-        vm.FilterPorducts = vm.FilterPorducts.sort(function (a, b) {
-          return a.price - b.price
-        })
+        vm.FilterPorducts = vm.FilterPorducts.sort((a, b) => a.price - b.price)
       } else if (num === 2) {
-        vm.FilterPorducts = vm.FilterPorducts.sort(function (a, b) {
-          return b.price - a.price
-        })
+        vm.FilterPorducts = vm.FilterPorducts.sort((a, b) => b.price - a.price)
       }
     },
     EditLikeList (item) {
