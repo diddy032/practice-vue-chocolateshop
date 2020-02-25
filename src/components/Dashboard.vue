@@ -1,11 +1,11 @@
 <template>
   <div>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow navbar-expand ">
-      <router-link class="navbar-brand col-sm-3 col-md-2 mr-0" href="#" to="/home">後台儀表板</router-link>
+      <router-link class="navbar-brand col-sm-3 col-md-2 mr-0" href="#" to="/">後台儀表板</router-link>
       <div class="ml-auto">
         <ul class="navbar-nav px-3">
            <li class="nav-item text-nowrap">
-            <router-link class="nav-link" href="#" to="/home">回首頁</router-link>
+            <router-link class="nav-link" href="#" to="/">回首頁</router-link>
           </li>
           <li class="nav-item text-nowrap">
             <a class="nav-link" href="#" @click.prevent="signout">登出</a>
@@ -87,7 +87,7 @@ export default {
       const vm = this
       vm.$http.post(api).then((response) => {
         if (response.data.success) {
-          vm.$router.push('/home')
+          vm.$router.push('/')
         }
       })
     }

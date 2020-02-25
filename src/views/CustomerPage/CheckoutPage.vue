@@ -144,7 +144,7 @@ export default {
         vm.cart = response.data.data
 
         if (vm.cart.total === 0) {
-          vm.$router.push('/home')
+          vm.$router.push('/')
           vm.$bus.$emit('message:push', '該頁面目前禁止訪問', 'danger')
         }
 

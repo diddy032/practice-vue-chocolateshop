@@ -7,7 +7,7 @@
           <div class="container">
             <div class="row align-items-center">
               <div class="col-6 col-md-12 col-lg-3 mb-md-0 order-1 order-md-1 text-left text-md-center text-lg-left">
-                <router-link to="/home" class="site-logo">
+                <router-link to="/" class="site-logo">
                   <img src="../assets/images/chocolate-logo.jpg" class="js-logo-clone" alt="" height="50px">
                 </router-link>
               </div>
@@ -16,7 +16,7 @@
                   <nav class="site-navigation text-right text-md-center" role="navigation">
                     <div class="container website-menu-body d-none d-md-block">
                       <ul class="site-menu js-clone-nav text-sm-left text-md-center text-lg-right" :class="{'site-nav-wrap':isMobile}">
-                        <router-link to="/home" v-slot="{ href, route, navigate, isActive }">
+                        <router-link to="/" v-slot="{ href, route, navigate, isActive }">
                           <li :class="[isActive && 'active']" @click="ClickMobilMenu">
                             <a :href="href" @click="navigate">首頁</a>
                           </li>
@@ -88,7 +88,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-12 mb-0">
-            <router-link to="/home" >首頁</router-link>
+            <router-link to="/" >首頁</router-link>
             <span class="mx-2 mb-0">/</span>
             <strong class="text-black">{{$route.name}}</strong>
             </div>

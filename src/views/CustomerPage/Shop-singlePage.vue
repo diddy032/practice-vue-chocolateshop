@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 mb-0">
-            <router-link to="/home" >首頁</router-link>
+            <router-link to="/" >首頁</router-link>
             <span class="mx-2 mb-0">/</span>
             <router-link to="/shop" >我們的商品</router-link>
             <span class="mx-2 mb-0">/</span>

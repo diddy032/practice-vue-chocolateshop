@@ -19,7 +19,7 @@
               </div>
             </a>
           </div>
-          <div class="col-sm-12 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="100">
+          <div class="col-sm-12 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="100">
             <a class="block-2-item" href="#" @click.prevent="toCategory('巧克力餅乾')">
               <figure class="image">
                 <img src="../../assets/images/collections-3.jpg" alt="" class="img-fluid">
@@ -30,7 +30,7 @@
               </div>
             </a>
           </div>
-          <div class="col-sm-12 col-md-6 col-lg-4 mb-5 mb-lg-0" data-aos="fade" data-aos-delay="200">
+          <div class="col-sm-12 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="200">
             <a class="block-2-item" href="#"  @click.prevent="toCategory('濃醇巧克力')">
               <figure class="image">
                 <img src="../../assets/images/collections-1.jpg" alt="" class="img-fluid">

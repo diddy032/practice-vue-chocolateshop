@@ -26,7 +26,7 @@
     <div class="site-section site-section-sm site-blocks-1 border-0" data-aos="fade">
       <div class="container">
         <div class="row">
-          <div class="col-md-6 col-lg-4 d-lg-flex mb-2 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="">
+          <div class="col-md-6 col-lg-4 d-flex mb-5 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="">
             <div class="icon mr-2 align-self-start">
               <i class="far fa-thumbs-up text-primary fa-lg"></i>
             </div>
@@ -36,7 +36,7 @@
               <p>運用多種技法，以手繪方式，在製作的過程中為每顆巧克力注入靈魂，將香草莢與單一產地精選可可豆結合，創造專屬於我們的精品巧克力風味，以工匠精神，製作品質、細緻、藝術為一體的工藝級巧克力。</p>
             </div>
           </div>
-          <div class="col-md-6 col-lg-4 d-lg-flex mb-2 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-md-6 col-lg-4 d-flex mb-5 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="100">
             <div class="icon mr-2 align-self-start">
               <i class="fas fa-seedling text-primary fa-lg"></i>
             </div>
@@ -46,7 +46,7 @@
               <p>為了尋找風味與安全兼具的食材，不斷的向各家烘培食材訂購不同品牌原物料，如神農嘗百草的精神，一一去品味跟測試，不計成本選用符合品質要求的原物料來製作甜點。</p>
             </div>
           </div>
-          <div class="col-md-6 col-lg-4 d-lg-flex mb-2 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-md-6 col-lg-4 d-flex mb-5 mb-lg-0 pl-4" data-aos="fade-up" data-aos-delay="200">
             <div class="icon mr-2 align-self-start">
               <i class="fas fa-hand-holding-heart text-primary fa-lg"></i>
             </div>
@@ -67,7 +67,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 col-lg-4">
+          <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
             <div class="block-38 text-center">
               <div class="block-38-img">
                 <div class="block-38-header">
@@ -81,7 +81,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6 col-lg-4">
+          <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
             <div class="block-38 text-center">
               <div class="block-38-img">
                 <div class="block-38-header">
@@ -95,7 +95,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6 col-lg-4">
+          <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
             <div class="block-38 text-center">
               <div class="block-38-img">
                 <div class="block-38-header">

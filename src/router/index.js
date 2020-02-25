@@ -6,11 +6,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '*',
-    redirect: '/home'
-  },
-  {
-    path: '/',
-    redirect: '/home'
+    redirect: '/'
   },
   {
     path: '/',
@@ -18,7 +14,7 @@ const routes = [
     children: [
       {
         name: '首頁',
-        path: 'home',
+        path: '',
         component: () => import('../views/CustomerPage/HomePage.vue')
       },
       {

@@ -3,8 +3,6 @@
     <router-view/>
   </div>
 </template>
-<script>
-import './assets/all.scss'
-export default {
-}
-</script>
+<style lang="scss">
+  @import './assets/all.scss';
+</style>
